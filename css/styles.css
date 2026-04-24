@@ -6,7 +6,6 @@
   box-sizing:border-box;
   margin:0;
   padding:0;
-
 }
 
 :root {
@@ -15,7 +14,6 @@
   --gray:#555;
   --light:#EEE;
   --accent:#C8A96E;
-
 }
 
 body {
@@ -23,7 +21,6 @@ body {
   font-family:'DM Sans',sans-serif;
   overflow:hidden;
   height:100vh;
-
 }
 
 .deck {
@@ -31,7 +28,6 @@ body {
   height:100vh;
   position:relative;
   overflow:hidden;
-
 }
 
 .slide {
@@ -42,19 +38,16 @@ body {
   transition:opacity .5s ease,transform .5s ease;
   transform:translateX(30px);
   display:flex;
-
 }
 
 .slide.active {
   opacity:1;
   pointer-events:all;
   transform:translateX(0);
-
 }
 
 .slide.prev {
   transform:translateX(-30px);
-
 }
 
 /* COVER */
@@ -63,8 +56,6 @@ body {
   flex-direction:column;
   align-items:flex-start;
   justify-content:center;
-  /*overflow:hidden;*/
-
 }
 
 .cover-img {
@@ -75,7 +66,6 @@ body {
   object-fit:cover;
   opacity:.32;
   filter:grayscale(100%);
-
 }
 
 .cover-content {
@@ -83,7 +73,6 @@ body {
   z-index:2;
   padding:0 80px;
   max-width:760px;
-
 }
 
 .cover-eyebrow {
@@ -93,7 +82,6 @@ body {
   color:var(--accent);
   text-transform:uppercase;
   margin-bottom:20px;
-
 }
 
 .cover-title {
@@ -104,7 +92,6 @@ body {
   line-height:.92;
   letter-spacing:-2px;
   margin-bottom:22px;
-
 }
 
 .cover-sub {
@@ -114,7 +101,6 @@ body {
   letter-spacing:3px;
   text-transform:uppercase;
   margin-bottom:40px;
-
 }
 
 .cover-line {
@@ -122,7 +108,6 @@ body {
   height:2px;
   background:var(--accent);
   margin-bottom:28px;
-
 }
 
 .cover-meta {
@@ -130,17 +115,14 @@ body {
   color:rgba(238, 238, 238, 0.822);
   letter-spacing:2px;
   text-transform:uppercase;
-
 }
 
 /* FULL */
 .slide-full {
-  /*position: relative;*/
   background: var(--black);
   width: 100%;
   height: 100%;
   overflow: hidden;
-
 }
 
 .slide-full img {
@@ -150,7 +132,6 @@ body {
   height: 100%;
   object-fit: contain;
   filter: grayscale(10%) contrast(1.05);
-
 }
 
 .slide-full .label {
@@ -163,7 +144,6 @@ body {
   display:flex;
   align-items:flex-end;
   justify-content:space-between;
-
 }
 
 .slide-full .label-title {
@@ -171,7 +151,6 @@ body {
   font-size:clamp(14px,1.8vw,22px);
   font-weight:700;
   color:var(--white);
-
 }
 
 .slide-full .label-num {
@@ -182,13 +161,11 @@ body {
   text-transform:uppercase;
   white-space:nowrap;
   margin-left:20px;
-
 }
 
 /* SPLIT */
 .slide-split {
   background:var(--black);
-
 }
 
 .split-left {
@@ -198,13 +175,11 @@ body {
   flex-direction:column;
   justify-content:center;
   border-right:1px solid rgba(255,255,255,.07);
-
 }
 
 .split-right {
   flex:1;
   overflow:hidden;
-
 }
 
 .split-right img {
@@ -212,7 +187,6 @@ body {
   height:100%;
   object-fit:cover;
   filter:grayscale(15%) contrast(1.05);
-
 }
 
 .split-eyebrow {
@@ -222,7 +196,6 @@ body {
   color:var(--accent);
   text-transform:uppercase;
   margin-bottom:14px;
-
 }
 
 .split-title {
@@ -233,7 +206,6 @@ body {
   line-height:1.1;
   margin-bottom:18px;
   letter-spacing:-.5px;
-
 }
 
 .split-divider {
@@ -241,7 +213,6 @@ body {
   height:2px;
   background:var(--accent);
   margin-bottom:18px;
-
 }
 
 .split-body {
@@ -249,7 +220,6 @@ body {
   color:rgba(255, 255, 255, 0.836);
   line-height:1.8;
   font-weight:300;
-
 }
 
 .split-num {
@@ -259,7 +229,6 @@ body {
   color:rgba(255,255,255,.18);
   letter-spacing:3px;
   text-transform:uppercase;
-
 }
 
 /* GRID 2 */
@@ -268,13 +237,11 @@ body {
   display:grid!important;
   grid-template-columns:1fr 1fr;
   gap:3px;
-
 }
 
 .grid-cell {
   position:relative;
   overflow:hidden;
-
 }
 
 .grid-cell img {
@@ -282,7 +249,6 @@ body {
   height:100%;
   object-fit:cover;
   filter:grayscale(15%);
-
 }
 
 .grid-cell .cell-label {
@@ -297,7 +263,6 @@ body {
   font-weight:500;
   letter-spacing:1px;
   text-transform:uppercase;
-
 }
 
 #s12 .right {
@@ -305,14 +270,14 @@ body {
   grid-template-rows: 1.3fr 1fr;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
-  height: 100%; /* Ayuda a que la grilla ocupe todo el alto de la columna derecha */
+  height: 100%;
 }
 
 /* 2. Preparamos las zonas de imagen */
 #s12 .right .img-zone {
-  position: relative; /* CRÍTICO: Mantiene el texto absolute dentro de este div */
+  position: relative; 
   overflow: hidden; 
-  border-radius: 8px; /* Un pequeño borde redondeado como se ve en tu captura */
+  border-radius: 8px; 
 }
 
 /* 3. Hacemos que la primera imagen ocupe las dos columnas */
@@ -324,7 +289,7 @@ body {
 #s12 .right .img-zone img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Recorta la imagen proporcionalmente para llenar la celda */
+  object-fit: cover; 
   display: block;
 }
 
@@ -336,7 +301,6 @@ body {
   justify-content:center;
   text-align:center;
   padding:80px;
-
 }
 
 .divider-num {
@@ -346,7 +310,6 @@ body {
   color:var(--light);
   line-height:1;
   margin-bottom:16px;
-
 }
 
 .divider-label {
@@ -356,7 +319,6 @@ body {
   color:var(--gray);
   text-transform:uppercase;
   margin-bottom:12px;
-
 }
 
 .divider-title {
@@ -366,7 +328,6 @@ body {
   color:var(--black);
   letter-spacing:-1px;
   line-height:1.1;
-
 }
 
 .divider-line {
@@ -374,7 +335,6 @@ body {
   height:3px;
   background:var(--black);
   margin:20px auto 0;
-
 }
 
 /* NAV */
@@ -393,17 +353,14 @@ body {
   border-radius: 50px;
   z-index: 100;
   border: 1px solid rgba(255,255,255,.07);
-
 }
 
 /* ── DOTS TRACK (ventana deslizante) ─────────── */
-/* Ventana visible: muestra ~9 dots (ancho fijo) */
 #dots {
   position: relative;
-  width: 110px;          /* ventana recortada */
+  width: 110px;
   height: 14px;
   overflow: hidden;
-  /* fade suave en los bordes izq/der */
   -webkit-mask-image: linear-gradient(
     to right,
     transparent 0%,
@@ -418,10 +375,8 @@ body {
     black 82%,
     transparent 100%
   );
-
 }
 
-/* Carril interior con todos los dots en fila */
 .dots-track {
   position: absolute;
   top: 50%;
@@ -430,9 +385,7 @@ body {
   align-items: center;
   gap: 8px;
   transform: translateY(-50%);
-  /* la translación X se aplica desde JS */
   transition: transform 0.4s cubic-bezier(.4,0,.2,1);
-
 }
 
 .nav-dot {
@@ -444,13 +397,11 @@ body {
   cursor: pointer;
   transition: background .3s, transform .3s, opacity .3s;
   opacity: 1;
-
 }
 
 .nav-dot.active {
   background: var(--accent);
   transform: scale(1.55);
-
 }
 
 /* ── BOTONES ─────────────────────────────────── */
@@ -467,13 +418,11 @@ body {
   cursor: pointer;
   transition: all .2s;
   white-space: nowrap;
-
 }
 
 .nav-btn:hover {
   background: rgba(255,255,255,.1);
   color: #fff;
-
 }
 
 .slide-counter {
@@ -483,7 +432,6 @@ body {
   text-align: center;
   font-family: 'DM Sans',sans-serif;
   letter-spacing: 1px;
-
 }
 
 .progress {
@@ -494,66 +442,42 @@ body {
   background:var(--accent);
   z-index:200;
   transition:width .4s ease;
-
 }
 
 /* ANIM */
 .slide.active .anim {
   animation:fadeUp .55s ease both;
-
 }
 
-.d1 {
-  animation-delay:.08s!important;
-
-}
-.d2 {
-  animation-delay:.2s!important;
-
-}
-.d3 {
-  animation-delay:.32s!important;
-
-}
-.d4 {
-  animation-delay:.44s!important;
-
-}
+.d1 { animation-delay:.08s!important; }
+.d2 { animation-delay:.2s!important; }
+.d3 { animation-delay:.32s!important; }
+.d4 { animation-delay:.44s!important; }
 
 @keyframes fadeUp {
-  from {
-  opacity:0;
-  transform:translateY(14px);
-
-}
-to {
-  opacity:1;
-  transform:translateY(0);
-
-}
-
+  from { opacity:0; transform:translateY(14px); }
+  to { opacity:1; transform:translateY(0); }
 }
 
 /* ====================================================
    MODAL / LIGHTBOX PARA IMÁGENES
 ==================================================== */
 .lightbox-modal {
-  display: none; /* Oculto por defecto */
+  display: none;
   position: fixed;
   z-index: 9999; 
   left: 0;
   top: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.9); /* Fondo bien oscuro */
-  backdrop-filter: blur(5px); /* Efecto difuminado elegante */
+  background-color: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(5px);
   align-items: center;
   justify-content: center;
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
-/* Clase que agregamos con JS para mostrarlo */
 .lightbox-modal.show {
   display: flex;
   opacity: 1;
@@ -562,7 +486,7 @@ to {
 .lightbox-content {
   max-width: 90%;
   max-height: 90%;
-  object-fit: contain; /* Escala la imagen sin deformarla */
+  object-fit: contain;
   box-shadow: 0 4px 25px rgba(0,0,0,0.8);
   border-radius: 4px;
 }
@@ -580,82 +504,219 @@ to {
 }
 
 .lightbox-close:hover {
-  color: var(--accent); /* Usa tu variable de color dorado/acento */
+  color: var(--accent);
 }
 
 /* ====================================================
    DISEÑO RESPONSIVE (MÓVILES Y TABLETS)
 ==================================================== */
 @media (max-width: 768px) {
-  
-  /* 1. Permitimos scroll vertical dentro de cada slide */
   .slide {
     overflow-y: auto;
     overflow-x: hidden;
-    padding-bottom: 80px; /* Evita que el texto quede tapado por la botonera */
+    padding-bottom: 80px;
   }
-
-  /* 2. Ajustes de la portada */
-  .cover-content {
-    padding: 0 25px;
-  }
-  
-  /* 3. Rompemos las columnas: apilamos texto arriba e imagen abajo */
-  .slide-split {
-    flex-direction: column;
-  }
+  .cover-content { padding: 0 25px; }
+  .slide-split { flex-direction: column; }
   .split-left {
     width: 100%;
     padding: 40px 25px 30px 25px;
     border-right: none;
-    flex: none; /* Deja que el texto ocupe el alto que necesite */
-  }
-  .split-right {
-    width: 100%;
-    height: 350px; /* Le damos una altura fija a las fotos en el celu */
     flex: none;
   }
-
-  /* 4. Grillas de imágenes (Sección 3 y Etapas) */
+  .split-right { width: 100%; height: 350px; flex: none; }
   #s12 .right {
-    grid-template-columns: 1fr; /* Forzamos a una sola columna */
+    grid-template-columns: 1fr;
     grid-template-rows: auto;
     padding: 0 20px 20px 20px;
     height: auto;
   }
-  /* Evitamos que la primera foto intente ocupar 2 columnas que ya no existen */
-  #s12 .right .img-zone:first-child {
-    grid-column: span 1; 
-  }
-  #s12 .right .img-zone {
-    height: 250px; 
-  }
+  #s12 .right .img-zone:first-child { grid-column: span 1; }
+  #s12 .right .img-zone { height: 250px; }
+  .slide-grid2 { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; }
+  .slide-divider { padding: 40px 20px; }
+  .nav { width: 90%; justify-content: space-between; bottom: 15px; }
+  .slide-counter { display: none; }
+  .lightbox-close { top: 15px; right: 20px; font-size: 35px; }
+}
 
-  /* 5. Slides de Antes y Después (Grid 2) */
-  .slide-grid2 {
-    grid-template-columns: 1fr; /* Apila el "antes" arriba y el "después" abajo */
-    grid-template-rows: 1fr 1fr;
-  }
+/* ====================================================
+   AJUSTES LEAFLET
+==================================================== */
+.nav { z-index: 2000; }
+.leaflet-container { font-family: 'DM Sans', sans-serif; }
+.leaflet-popup-content-wrapper, .leaflet-popup-tip {
+  background: rgba(10, 10, 10, 0.95) !important;
+  color: var(--white) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  backdrop-filter: blur(5px);
+}
+.leaflet-popup-content { font-family: 'DM Sans', sans-serif; font-size: 13px; line-height: 1.6; margin: 16px; }
+.leaflet-popup-content b { color: var(--accent); text-transform: capitalize; }
+.leaflet-popup-close-button { color: var(--white) !important; padding: 4px !important; }
+#webmap .split-right { position: relative; }
+#map { position: absolute !important; top: 0; left: 0; bottom: 0; right: 0; width: 100% !important; height: 100% !important; z-index: 1; }
 
-  /* 6. Carteles de Separación (Dividers) */
-  .slide-divider {
-    padding: 40px 20px;
-  }
+/* ====================================================
+   MAPA INTERACTIVO (SVG) DE PROPUESTAS
+==================================================== */
+.legend-group { display: flex; flex-direction: column; gap: 6px; }
+.legend-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+.legend-item:hover { color: var(--white); background: rgba(200, 169, 110, 0.15); }
+.legend-num { min-width: 18px; font-size: 13px; font-weight: 700; color: #d4763a; }
+.legend-letter { min-width: 18px; font-size: 13px; font-weight: 700; color: #8dbf8e; }
 
-  /* 7. Ajustes de la botonera inferior */
-  .nav {
-    width: 90%; /* La hacemos más ancha para que sea fácil tocar los botones */
-    justify-content: space-between; /* Separa los botones a los bordes */
-    bottom: 15px;
-  }
-  .slide-counter {
-    display: none; /* Ocultamos los números (01/31) en celu para ganar espacio */
-  }
+/* ── ÁREA DEL MAPA SVG (SISTEMA DE INTERACTIVIDAD CORREGIDO) ── */
+.map-area {
+  position: relative;
+  overflow: hidden;
+  background: #ffffff; /* ¡Acá estaba el color amarillo/beige! */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-  /* 8. Ajustes del Botón de cerrar del Lightbox */
-  .lightbox-close {
-    top: 15px;
-    right: 20px;
-    font-size: 35px;
-  }
+.map-svg-interactive {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+}
+
+/* Nodos interactivos (círculos) como elementos SVG reales */
+.node-svg {
+  cursor: pointer;
+  pointer-events: none; /* El grupo no atrapa el mouse, lo hará el círculo invisible interno */
+  transform-box: fill-box;
+  transform-origin: center;
+  /* Animación más lenta (0.4s) y con un efecto de frenado suave */
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Esta clase se activará mediante JS cuando pases el mouse */
+.node-svg.is-active {
+  transform: scale(1.1); /* Crece un 10% de forma suave */
+}
+
+/* ── LIGHTBOX MAXIMIZADO (SOLUCIÓN TAMAÑO IMÁGENES) ── */
+.map-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.map-lightbox.open {
+  opacity: 1;
+  pointer-events: all;
+}
+.lb-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 10, 10, 0.92);
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+}
+.map-lightbox .lb-card {
+  position: relative;
+  z-index: 2;
+  background: #111;
+  border: 1px solid rgba(200, 169, 110, 0.3);
+  border-radius: 6px;
+  overflow: hidden;
+  width: 94vw;
+  height: 94vh;
+  max-width: none;
+  display: flex;
+  flex-direction: column;
+  transform: scale(0.92);
+  transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.8);
+}
+.map-lightbox.open .lb-card { transform: scale(1); }
+
+.lb-image-wrap {
+  width: 100%;
+  flex-grow: 1;
+  background: #222;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lb-image-wrap img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.lb-info { padding: 18px 24px 24px; flex-shrink: 0; }
+.lb-title { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; color: var(--white); line-height: 1.2; }
+.lb-badge {
+  display: inline-flex;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.lb-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  background: rgba(0,0,0,0.5);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 50%;
+  color: var(--white);
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: background 0.2s;
+}
+.lb-close:hover { background: var(--accent); }
+
+/* ====================================================
+   AJUSTES DE ZOOM Y PANEO PARA EL MAPA SVG
+==================================================== */
+.map-svg-interactive {
+  cursor: grab;
+  touch-action: none; /* Evita que la página haga scroll en táctiles */
+}
+.map-svg-interactive:active {
+  cursor: grabbing;
+}
+
+/* Solución para que los nodos reaccionen al hover sin bloquearse */
+.node-svg {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.node-svg.is-active {
+  transform: scale(1.15);
 }

@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Distrito de Arte, Diseño y Cultura — Corrientes</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./css/styles.css">
 </head>
@@ -234,7 +236,7 @@
 
 <!-----------------AGREGAR MAPAS NUEVOS ACÁ---------------->
 
-<!--------------ETAPA 1 - INICIO ------------------>
+<!-------------------------------->
 <div class="slide slide-divider" id="s1" style="display:flex;">
   <div class="divider-num">03</div>
   <div class="divider-label">Sección</div>
@@ -254,55 +256,85 @@
   </div>
   <div class="split-right"><img src="imagenes/Relevamiento_zonificación.jpg" alt="propuesta completa"></div>  
 </div>
+<!-------------------------------->
 
-<div class="slide slide-split" id="propuestas">
-  <div class="split-left">
-    <div class="split-eyebrow anim d1">3- Propuesta integral <br>del sector</div>
-    <div class="split-title anim d2">Zonificacion y propuestas</div>
-    <div class="split-divider anim d2"></div>
-    <div class="split-body anim d3">
-      1. Escuela de Arte Municipal.<br>
-      2. Galería de Arte<br>
-      3. Museo del Carvaval<br>
-      4. Museo del Chamamé y Peña<br>
-      5. Museo del Deporte Correntino<br>
-      6. Instituo de Diseño Tecnico Industrial<br>
-      7. Expo Técnica<br>
-      8. Area Disponible para Equipamientos<br>
-      9. Instituto Tecnológico<br>
-      
-      <br>a. Plazoleta de los Inmigrantes<br>
-      b. Predio Caminito<br>
-      c. Plaza de las Americas<br>
-      d. Refuncionalizacion espacio público mixto escuela/paseo lamadrid<br>
-      e. Paseo Lamadrid<br>
-      f. Esquina Av. Aviador Correa Fernández y Av. Rep. del Líbano<br>
-      g. Corredor Saludable Av. Aviador Correa Fernández<br>
-    </div>
-    <div class="split-num anim d4">Barrio Berón de Astrada · Corrientes</div>
-  </div>
-  <div class="split-right"><img src="imagenes/zonificacion4.jpeg" alt="propuesta completa"></div>  
-</div>
-<!--------------ETAPA 1 - INICIO -
 <div class="slide slide-split" id="s12">
   <div class="split-left">
-    <div class="split-eyebrow anim d1">3- Propuesta integral <br>del sector</div>
-    <div class="split-title anim d2">Propuestas</div>
+    <div class="split-eyebrow anim d1">Nexos y Circuitos</div>
+    <div class="split-title anim d2">Nexos y Circuitos</div>
     <div class="split-divider anim d2"></div>
     <div class="split-body anim d3">
-      Propuesta integral.
+      Relevamiento aereo.
     </div>
     <div class="split-num anim d4">Barrio Berón de Astrada · Corrientes</div>
   </div>
-  <div class="split-right"><img src="imagenes/propuesta completa.jpg" alt="propuesta completa"></div>  
+  <div class="split-right"><img src="imagenes/nexos y circuitos.jpg" alt="propuesta completa"></div>  
 </div>
------------------>
+
+<!-------------------------------->
+<div class="slide slide-split" id="propuestas">
+  <div class="split-left" style="overflow-y: auto; padding-right: 20px;">
+    <div class="split-eyebrow anim d1">3 - Propuesta integral del sector</div>
+    <div class="split-title anim d2">Zonificación y Propuestas</div>
+    <div class="split-divider anim d2"></div>
+    <div class="split-body anim d3">
+      <div class="legend-group" id="legend-nums"></div>
+      
+      <div style="height: 1px; background: rgba(200, 169, 110, 0.15); margin: 20px 0;"></div>
+      
+      <div class="legend-group" id="legend-letters"></div>
+    </div>
+    <div class="split-num anim d4">Barrio Berón de Astrada · Corrientes</div>
+  </div>
+  
+  <div class="split-right map-area" style="background: #e8e3d5; display: flex; align-items: center;">
+    <svg class="map-svg-interactive" viewBox="0 0 900 620" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" style="width: 100%; height: 100%;">
+    <image href="imagenes/plano_base.jpg" x="0" y="0" width="900" height="620" preserveAspectRatio="xMidYMid slice"/>      
+    <g id="nodes-container-svg"></g>
+    </svg>
+    <div id="nodes-container"></div>
+  </div>  
+</div>
+
+<div class="map-lightbox" id="mapLightbox">
+  <div class="lb-backdrop" id="lbBackdrop"></div>
+  <div class="lb-card">
+    <button class="lb-close" id="lbClose">✕</button>
+    <div class="lb-image-wrap">
+      <img id="lbImg" src="" alt="">
+    </div>
+    <div class="lb-info">
+      <div class="lb-badge" id="lbBadge">— Propuesta</div>
+      <div class="lb-title" id="lbTitle">Nombre</div>
+    </div>
+  </div>
+</div>
+
+<!--------------ETAPA 1 - INICIO ------------------>
+<div class="slide slide-split" id="webmap">
+  <div class="split-left">
+    <div class="split-eyebrow anim d1">Webmap de Propuestas</div>
+    <div class="split-title anim d2">Webmap de Propuestas</div>
+    <div class="split-divider anim d2"></div>
+    <div class="split-body anim d3">
+      Webmap de Propuestas
+    </div>
+    <div class="split-num anim d4">Barrio Berón de Astrada · Corrientes</div>
+  </div>
+  <div class="split-right" style="position: relative;">
+    <div id="map"></div>
+  </div>  
+</div>
+
 <div class="nav">
-  <button class="nav-btn" id="prevBtn">← Ant.</button>
-  <div id="dots"></div>
-  <span class="slide-counter" id="counter">01 / 31</span>
-  <button class="nav-btn" id="nextBtn">Sig. →</button>
+    <button class="nav-btn" id="prevBtn">← Ant.</button>
+    <div id="dots"></div>
+    <span class="slide-counter" id="counter">01 / 31</span>
+    <button class="nav-btn" id="nextBtn">Sig. →</button>
 </div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
 <script src="./js/script.js"></script>
 </body>
 </html>
