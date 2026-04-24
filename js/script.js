@@ -232,24 +232,24 @@ observer.observe(webmapSlide, { attributes: true, attributeFilter: ['class'] });
 const mapNumbered = [
   // centroid = centro del polígono naranja correspondiente en coords % (x*9, y*6.2 = SVG px)
   // Ajustá estos valores según tu mapa real
-  { id: "1", label: "Escuela de Arte Municipal",               img: "imagenes/Escuela de Arte Municipal.jpg",               x: 21, y: 35.5, centroid: { x: 26.8, y: 37.5 } },
-  { id: "2", label: "Galería de Arte",                         img: "imagenes/Galería de Arte.jpg",                         x: 19.6, y: 47.7, centroid: { x: 24.2, y: 46.7 } },
-  { id: "3", label: "Museo del Carnaval",                      img: "imagenes/Museo del Carnaval.jpg",                      x: 30, y: 30, centroid: { x: 32.9, y: 35.2 } },
-  { id: "4", label: "Museo del Chamamé y Peña",                img: "imagenes/Museo del Chamamé y Peña.jpg",                x: 44, y: 43, centroid: { x: 42.6, y: 40.5 } },
-  { id: "5", label: "Museo del Deporte Correntino",            img: "imagenes/Museo del Deporte Correntino.jpg",            x: 35, y: 58.4, centroid: { x: 36.3, y: 51.3 } },
-  { id: "6", label: "Instituto de Diseño Técnico Industrial",  img: "imagenes/Instituto de Diseño Técnico Industrial.jpg",  x: 44, y: 72, centroid: { x: 47, y: 76 } },
-  { id: "7", label: "Expo Técnica",                            img: "imagenes/Expo Técnica.jpg",                            x: 61, y: 62, centroid: { x: 63, y: 66 } },
-  { id: "8", label: "Área Disponible para Equipamientos",      img: "imagenes/Área Disponible para Equipamientos.jpeg",     x: 68, y: 70, centroid: { x: 70, y: 74 } },
-  { id: "9", label: "Instituto Tecnológico",                   img: "imagenes/Instituto Tecnológico.jpg",                   x: 78, y: 78, centroid: { x: 81, y: 81 } },
+  { id: "1", label: "Escuela de Arte Municipal",               img: "imagenes/Escuela de Arte Municipal.jpg",               x: 11, y: 20, centroid: { x: 26, y: 40.2 } },
+  { id: "2", label: "Galería de Arte",                         img: "imagenes/Galería de Arte.jpg",                         x: 16, y: 48, centroid: { x: 23.1, y: 45.8 } },
+  { id: "3", label: "Museo del Carnaval",                      img: "imagenes/Museo del Carnaval.jpg",                      x: 25.4, y: 14.4, centroid: { x: 32.2, y: 32.3 } },
+  { id: "4", label: "Museo del Chamamé y Peña",                img: "imagenes/Museo del Chamamé y Peña.jpg",                x: 41.6, y: 10.2, centroid: { x: 42.1, y: 40.2 } },
+  { id: "5", label: "Museo del Deporte Correntino",            img: "imagenes/Museo del Deporte Correntino.jpg",            x: 30, y: 58, centroid: { x: 34.5, y: 52.3 } },
+  { id: "6", label: "Instituto de Diseño Técnico Industrial",  img: "imagenes/Instituto de Diseño Técnico Industrial.jpg",  x: 40, y: 88, centroid: { x: 46, y: 65 } },
+  { id: "7", label: "Expo Técnica",                            img: "imagenes/Expo Técnica.jpg",                            x: 57, y: 75, centroid: { x: 60.3, y: 52 } },
+  { id: "8", label: "Área Disponible para Equipamientos",      img: "imagenes/Área Disponible para Equipamientos.jpeg",     x: 70.5, y: 80.9, centroid: { x: 71, y: 62 } },
+  { id: "9", label: "Instituto Tecnológico",                   img: "imagenes/Instituto Tecnológico.jpg",                   x: 78, y: 78, centroid: { x: 78, y: 68 } },
 ];
 
 const mapLettered = [
-  { id: "a", label: "Plazoleta de los Inmigrantes", img: "imagenes/Plazoleta de los Inmigrantes.jpg", x:  8, y: 70},
-  { id: "b", label: "Predio Caminito", img: "imagenes/Predio Caminito.jpg", x: 39.8, y: 34.4},
-  { id: "c", label: "Plaza de las Américas", img: "imagenes/Plaza de las Américas.jpg", x: 67, y: 41 },
+  { id: "a", label: "Plazoleta de los Inmigrantes",            img: "imagenes/Plazoleta de los Inmigrantes.jpg",            x:  7, y: 59.9}, 
+  { id: "b", label: "Predio Caminito",                         img: "imagenes/Predio Caminito.jpg",                         x: 37.5, y: 31},
+  { id: "c", label: "Plaza de las Américas",                   img: "imagenes/Plaza de las Américas.jpg",                   x: 59, y: 41 },
   { id: "d", label: "Refuncionalización espacio público mixto escuela/paseo Lamadrid", img: "imagenes/Refuncionalización espacio público mixto escuela_paseo Lamadrid.jpeg", x: 49, y: 22 },
-  { id: "e", label: "Paseo de Lamadrid",                              img: "imagenes/Paseo de Lamadrid.jpg",                              x: 58, y: 34 },  // sin centroid → no migra
-  { id: "f", label: "Esquina Aviador Correa y República del Líbano", img: "imagenes/Esquina Aviador Correa y República del Líbano.jpg",  x: 70, y: 50 },  // sin centroid → no migra
+  { id: "e", label: "Paseo de Lamadrid",                       img: "imagenes/Paseo de Lamadrid.jpg",                       x: 62.6, y: 31.7 },  // sin centroid → no migra
+  { id: "f", label: "Esquina Aviador Correa y República del Líbano", img: "imagenes/Esquina Aviador Correa y República del Líbano.jpg",  x: 67.1, y: 48.3 },  // sin centroid → no migra
   { id: "g", label: "Corredor Saludable",                            img: "imagenes/Corredor Saludable.jpeg",                            x: 92, y: 70 },  // sin centroid → no migra
 ];
 
@@ -380,13 +380,13 @@ if (svgMap) {
 }
 
 // --- LÓGICA DE INYECCIÓN DE NODOS ---
-// Estructura de 3 capas para resolver movimiento en hover y zoom reactivo:
-//   outerG  → posición (translate), se actualiza cada frame
-//   zoomG   → escala por zoom (scale), se actualiza cada frame, sin transición
-//   hoverG  → escala por hover, con transición CSS suave
-// Todo el contenido se dibuja en coordenadas locales (cx=0, cy=0 = centro del círculo)
 const BASE_RADIUS  = 35;
-const nodeRegistry = []; // { outerG, zoomG, data }
+const nodeRegistry = []; // { outerG, zoomG, data, connectorLine? }
+
+// Grupo de líneas conectoras — se inserta ANTES que los nodos para quedar debajo
+const linesGroup = document.createElementNS(svgNS, "g");
+linesGroup.setAttribute("id", "connector-lines");
+if (nodesContainerSvg) nodesContainerSvg.appendChild(linesGroup);
 
 if (nodesContainerSvg) {
   mapAllNodes.forEach(p => {
@@ -394,6 +394,22 @@ if (nodesContainerSvg) {
     const r  = BASE_RADIUS;
     const bx = p.x * 9;
     const by = p.y * 6.2;
+
+    // Línea conectora (solo para nodos con centroide definido)
+    let connectorLine = null;
+    if (p.centroid) {
+      connectorLine = document.createElementNS(svgNS, "line");
+      connectorLine.setAttribute("x1", bx);
+      connectorLine.setAttribute("y1", by);
+      connectorLine.setAttribute("x2", p.centroid.x * 9);
+      connectorLine.setAttribute("y2", p.centroid.y * 6.2);
+      connectorLine.setAttribute("stroke", "#1a1a1a");
+      connectorLine.setAttribute("stroke-width", "1.5");
+      connectorLine.setAttribute("stroke-dasharray", "5,4");
+      connectorLine.setAttribute("stroke-linecap", "round");
+      connectorLine.style.pointerEvents = 'none';
+      linesGroup.appendChild(connectorLine);
+    }
 
     // Capa 1: posición
     const outerG = document.createElementNS(svgNS, "g");
@@ -495,7 +511,7 @@ if (nodesContainerSvg) {
     outerG.appendChild(zoomG);
     nodesContainerSvg.appendChild(outerG);
 
-    nodeRegistry.push({ outerG, zoomG, data: p });
+    nodeRegistry.push({ outerG, zoomG, data: p, connectorLine });
   });
 }
 
@@ -509,7 +525,7 @@ function updateAllNodes() {
   // t: progreso de migración base → centroide (0=sin zoom, 1=3× zoom)
   const t = Math.max(0, Math.min(1, (1 - zoomRatio) / 0.67));
 
-  nodeRegistry.forEach(({ outerG, zoomG, data }) => {
+  nodeRegistry.forEach(({ outerG, zoomG, connectorLine, data }) => {
     const bx = data.x * 9;
     const by = data.y * 6.2;
     const cx = data.centroid ? data.centroid.x * 9   : bx;
@@ -519,8 +535,17 @@ function updateAllNodes() {
     const py = by + (cy - by) * t;
 
     outerG.setAttribute('transform', `translate(${px}, ${py})`);
-    // Achica el radio en SVG para mantener tamaño visual constante en pantalla
     zoomG.style.transform = `scale(${zoomRatio})`;
+
+    // Actualizar línea conectora: va del círculo al centroide del polígono
+    if (connectorLine) {
+      connectorLine.setAttribute("x1", px);
+      connectorLine.setAttribute("y1", py);
+      connectorLine.setAttribute("x2", cx);
+      connectorLine.setAttribute("y2", cy);
+      // La línea se desvanece a medida que el círculo llega al centroide
+      connectorLine.setAttribute("opacity", 1 - t);
+    }
   });
 }
 
