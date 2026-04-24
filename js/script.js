@@ -158,10 +158,38 @@ const esriDark = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/servic
 
 googleSat.addTo(map);
 
-// 3. Configurar el estilo de las capas GeoJSON
-const stylePredios = { color: "#ffffffec", weight: 2, fillOpacity: 0.6, fillColor: "#006d0db0" };
-const stylePropuestas = { color: "#E2711f", weight: 2, fillOpacity: 0.6, fillColor: "#E2711f" };
-const styleCaminito = { color: "#fffb00d7", weight: 2, /*dashArray: "5, 7"*/ fillOpacity: 0.6 , fillColor: "#fffb00d7" }; 
+// 3. Configurar el estilo de las capas GeoJSON dinámicamente
+
+// Función para clasificar los Predios
+function estiloPredios(feature) {
+    switch (feature.properties.Tipo) {
+        case 'Predio':
+            // Verde oscuro semitransparente para predios normales
+            return { color: "#fffffff6", weight: 2, fillOpacity: 0.6, fillColor: "#6d6d6da1" };
+        case 'A intervenir':
+            // Verde claro para espacios a intervenir
+            return { color: "#ebebeb", weight: 2, fillOpacity: 0.6, fillColor: "#a3eb30" };
+        default:
+            return { color: "#ffffffec", weight: 2, fillOpacity: 0.6, fillColor: "#ffffff" };
+    }
+}
+
+// Función para clasificar las Propuestas
+function estiloPropuestas(feature) {
+    switch (feature.properties.Tipo) {
+        case 'Existente':
+            // Gris para lo que ya está construido (ej. Club Huracán)
+            return { color: "#494949", weight: 1, fillOpacity: 0.8, fillColor: "#ffffffe0" };
+        case 'Propuesta':
+            // Naranja/Dorado para las nuevas propuestas
+            return { color: "#000000", weight: 2, fillOpacity: 0.7, fillColor: "#e21f70" };
+        default:
+            return { color: "#e21f70", weight: 2, fillOpacity: 0.6, fillColor: "#e21f70" };
+    }
+}
+
+// El Caminito se mantiene fijo porque es un solo tipo
+const styleCaminito = { color: "#000000d7", weight: 1, fillOpacity: 0.6 , fillColor: "#f7a121c9" };
 
 // Función dinámica para leer la tabla de atributos y crear el Popup
 function crearPopup(feature, layer) {
@@ -178,9 +206,9 @@ function crearPopup(feature, layer) {
     }
 }
 
-// 4. Crear los contenedores vacíos para las capas e inyectar la función del Popup
-const capaPredios = L.geoJSON(null, { style: stylePredios, onEachFeature: crearPopup });
-const capaPropuestas = L.geoJSON(null, { style: stylePropuestas, onEachFeature: crearPopup });
+// 4. Crear los contenedores vacíos para las capas e inyectar la función de Estilo y Popup
+const capaPredios = L.geoJSON(null, { style: estiloPredios, onEachFeature: crearPopup });
+const capaPropuestas = L.geoJSON(null, { style: estiloPropuestas, onEachFeature: crearPopup });
 const capaCaminito = L.geoJSON(null, { style: styleCaminito, onEachFeature: crearPopup });
 
 // 5. Control de Capas
