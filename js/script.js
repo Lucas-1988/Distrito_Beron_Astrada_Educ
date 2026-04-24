@@ -232,11 +232,11 @@ observer.observe(webmapSlide, { attributes: true, attributeFilter: ['class'] });
 const mapNumbered = [
   // centroid = centro del polígono naranja correspondiente en coords % (x*9, y*6.2 = SVG px)
   // Ajustá estos valores según tu mapa real
-  { id: "1", label: "Escuela de Arte Municipal",               img: "imagenes/Escuela de Arte Municipal.jpg",               x: 18, y: 40, centroid: { x: 20, y: 46 } },
-  { id: "2", label: "Galería de Arte",                         img: "imagenes/Galería de Arte.jpg",                         x: 16, y: 48, centroid: { x: 18, y: 53 } },
-  { id: "3", label: "Museo del Carnaval",                      img: "imagenes/Museo del Carnaval.jpg",                      x: 30, y: 30, centroid: { x: 33, y: 41 } },
-  { id: "4", label: "Museo del Chamamé y Peña",                img: "imagenes/Museo del Chamamé y Peña.jpg",                x: 44, y: 43, centroid: { x: 46, y: 50 } },
-  { id: "5", label: "Museo del Deporte Correntino",            img: "imagenes/Museo del Deporte Correntino.jpg",            x: 30, y: 58, centroid: { x: 33, y: 63 } },
+  { id: "1", label: "Escuela de Arte Municipal",               img: "imagenes/Escuela de Arte Municipal.jpg",               x: 21, y: 35.5, centroid: { x: 26.8, y: 37.5 } },
+  { id: "2", label: "Galería de Arte",                         img: "imagenes/Galería de Arte.jpg",                         x: 19.6, y: 47.7, centroid: { x: 24.2, y: 46.7 } },
+  { id: "3", label: "Museo del Carnaval",                      img: "imagenes/Museo del Carnaval.jpg",                      x: 30, y: 30, centroid: { x: 32.9, y: 35.2 } },
+  { id: "4", label: "Museo del Chamamé y Peña",                img: "imagenes/Museo del Chamamé y Peña.jpg",                x: 44, y: 43, centroid: { x: 42.6, y: 40.5 } },
+  { id: "5", label: "Museo del Deporte Correntino",            img: "imagenes/Museo del Deporte Correntino.jpg",            x: 35, y: 58.4, centroid: { x: 36.3, y: 51.3 } },
   { id: "6", label: "Instituto de Diseño Técnico Industrial",  img: "imagenes/Instituto de Diseño Técnico Industrial.jpg",  x: 44, y: 72, centroid: { x: 47, y: 76 } },
   { id: "7", label: "Expo Técnica",                            img: "imagenes/Expo Técnica.jpg",                            x: 61, y: 62, centroid: { x: 63, y: 66 } },
   { id: "8", label: "Área Disponible para Equipamientos",      img: "imagenes/Área Disponible para Equipamientos.jpeg",     x: 68, y: 70, centroid: { x: 70, y: 74 } },
@@ -245,12 +245,12 @@ const mapNumbered = [
 
 const mapLettered = [
   { id: "a", label: "Plazoleta de los Inmigrantes", img: "imagenes/Plazoleta de los Inmigrantes.jpg", x:  8, y: 70},
-  { id: "b", label: "Predio Caminito", img: "imagenes/Predio Caminito.jpg", x: 38, y: 38},
+  { id: "b", label: "Predio Caminito", img: "imagenes/Predio Caminito.jpg", x: 39.8, y: 34.4},
   { id: "c", label: "Plaza de las Américas", img: "imagenes/Plaza de las Américas.jpg", x: 67, y: 41 },
   { id: "d", label: "Refuncionalización espacio público mixto escuela/paseo Lamadrid", img: "imagenes/Refuncionalización espacio público mixto escuela_paseo Lamadrid.jpeg", x: 49, y: 22 },
-  { id: "e", label: "Paseo de Lamadrid", img: "imagenes/Paseo de Lamadrid.jpg", x: 58, y: 34 },
-  { id: "f", label: "Esquina Aviador Correa y República del Líbano", img: "imagenes/Esquina Aviador Correa y República del Líbano.jpg", x: 70, y: 50 },
-  { id: "g", label: "Corredor Saludable", img: "imagenes/Corredor Saludable.jpeg", x: 92, y: 70 },
+  { id: "e", label: "Paseo de Lamadrid",                              img: "imagenes/Paseo de Lamadrid.jpg",                              x: 58, y: 34 },  // sin centroid → no migra
+  { id: "f", label: "Esquina Aviador Correa y República del Líbano", img: "imagenes/Esquina Aviador Correa y República del Líbano.jpg",  x: 70, y: 50 },  // sin centroid → no migra
+  { id: "g", label: "Corredor Saludable",                            img: "imagenes/Corredor Saludable.jpeg",                            x: 92, y: 70 },  // sin centroid → no migra
 ];
 
 const mapAllNodes = [...mapNumbered, ...mapLettered];
@@ -524,7 +524,50 @@ function updateAllNodes() {
   });
 }
 
-// 3. Lógica del Lightbox (Ventana emergente)
+// ====================================================
+// PANEL DE CALIBRACIÓN — siempre visible en el mapa
+// Pasá el mouse sobre el centro de cada polígono y
+// copiá los valores al campo centroid: { x, y }
+// del nodo correspondiente en mapNumbered/mapLettered.
+// Eliminá este bloque cuando termines de calibrar.
+// ====================================================
+(function setupCalibration() {
+  const panel = document.createElement('div');
+  Object.assign(panel.style, {
+    position: 'fixed', bottom: '72px', right: '20px',
+    background: 'rgba(10,10,10,0.95)', border: '1px solid #C8A96E',
+    borderRadius: '6px', padding: '8px 16px',
+    fontFamily: 'monospace', fontSize: '12px', color: '#C8A96E',
+    zIndex: '99999', pointerEvents: 'none', display: 'none',
+    boxShadow: '0 4px 20px rgba(0,0,0,0.6)', whiteSpace: 'nowrap',
+  });
+  document.body.appendChild(panel);
+
+  document.addEventListener('mousemove', ev => {
+    // Buscar el SVG en cada movimiento (por si cargó tarde)
+    const svg = svgMap || document.querySelector('.map-svg-interactive');
+    if (!svg) return;
+
+    const rect = svg.getBoundingClientRect();
+    const inside = ev.clientX >= rect.left && ev.clientX <= rect.right &&
+                   ev.clientY >= rect.top  && ev.clientY <= rect.bottom;
+    if (!inside) { panel.style.display = 'none'; return; }
+
+    const vb = currentVB || { x: 0, y: 0, w: 900, h: 620 };
+    const svgX = ((ev.clientX - rect.left)  / rect.width)  * vb.w + vb.x;
+    const svgY = ((ev.clientY - rect.top)   / rect.height) * vb.h + vb.y;
+    const dx = (svgX / 9).toFixed(1);
+    const dy = (svgY / 6.2).toFixed(1);
+
+    panel.style.display = 'block';
+    panel.innerHTML =
+      `<span style="color:#888">x:</span> <b style="color:#fff">${dx}</b> &nbsp; ` +
+      `<span style="color:#888">y:</span> <b style="color:#fff">${dy}</b><br>` +
+      `<span style="color:#555; font-size:10px">centroid: { x: ${dx}, y: ${dy} }</span>`;
+  });
+})();
+
+// 3. Lógica del Lightbox
 const mapLb = document.getElementById('mapLightbox');
 const mapLbImg = document.getElementById('lbImg');
 const mapLbTitle = document.getElementById('lbTitle');
