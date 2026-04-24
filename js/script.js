@@ -230,15 +230,17 @@ observer.observe(webmapSlide, { attributes: true, attributeFilter: ['class'] });
 // ====================================================
 
 const mapNumbered = [
-  { id: "1", label: "Escuela de Arte Municipal", img: "imagenes/Escuela de Arte Municipal.jpg", x: 18, y: 40 },
-  { id: "2", label: "Galería de Arte", img: "imagenes/Galería de Arte.jpg", x: 16, y: 48 },
-  { id: "3", label: "Museo del Carnaval", img: "imagenes/Museo del Carnaval.jpg", x: 30, y: 30 },
-  { id: "4", label: "Museo del Chamamé y Peña", img: "imagenes/Museo del Chamamé y Peña.jpg", x: 44, y: 43 },
-  { id: "5", label: "Museo del Deporte Correntino", img: "imagenes/Museo del Deporte Correntino.jpg", x: 30, y: 58 },
-  { id: "6", label: "Instituto de Diseño Técnico Industrial", img: "imagenes/Instituto de Diseño Técnico Industrial.jpg", x: 44, y: 72},
-  { id: "7", label: "Expo Técnica", img: "imagenes/Expo Técnica.jpg", x: 61, y: 62 },
-  { id: "8", label: "Área Disponible para Equipamientos", img: "imagenes/Área Disponible para Equipamientos.jpeg", x: 68, y: 70 },
-  { id: "9", label: "Instituto Tecnológico", img: "imagenes/Instituto Tecnológico.jpg", x: 78, y: 78 },
+  // centroid = centro del polígono naranja correspondiente en coords % (x*9, y*6.2 = SVG px)
+  // Ajustá estos valores según tu mapa real
+  { id: "1", label: "Escuela de Arte Municipal",               img: "imagenes/Escuela de Arte Municipal.jpg",               x: 18, y: 40, centroid: { x: 20, y: 46 } },
+  { id: "2", label: "Galería de Arte",                         img: "imagenes/Galería de Arte.jpg",                         x: 16, y: 48, centroid: { x: 18, y: 53 } },
+  { id: "3", label: "Museo del Carnaval",                      img: "imagenes/Museo del Carnaval.jpg",                      x: 30, y: 30, centroid: { x: 33, y: 41 } },
+  { id: "4", label: "Museo del Chamamé y Peña",                img: "imagenes/Museo del Chamamé y Peña.jpg",                x: 44, y: 43, centroid: { x: 46, y: 50 } },
+  { id: "5", label: "Museo del Deporte Correntino",            img: "imagenes/Museo del Deporte Correntino.jpg",            x: 30, y: 58, centroid: { x: 33, y: 63 } },
+  { id: "6", label: "Instituto de Diseño Técnico Industrial",  img: "imagenes/Instituto de Diseño Técnico Industrial.jpg",  x: 44, y: 72, centroid: { x: 47, y: 76 } },
+  { id: "7", label: "Expo Técnica",                            img: "imagenes/Expo Técnica.jpg",                            x: 61, y: 62, centroid: { x: 63, y: 66 } },
+  { id: "8", label: "Área Disponible para Equipamientos",      img: "imagenes/Área Disponible para Equipamientos.jpeg",     x: 68, y: 70, centroid: { x: 70, y: 74 } },
+  { id: "9", label: "Instituto Tecnológico",                   img: "imagenes/Instituto Tecnológico.jpg",                   x: 78, y: 78, centroid: { x: 81, y: 81 } },
 ];
 
 const mapLettered = [
@@ -299,16 +301,17 @@ function animateViewBox() {
     svgMap.setAttribute('viewBox',
       `${currentVB.x} ${currentVB.y} ${currentVB.w} ${currentVB.h}`);
   }
+  updateAllNodes(); // mantener nodos en sincronía con el viewBox
 
   const delta = Math.abs(targetVB.x - currentVB.x) + Math.abs(targetVB.y - currentVB.y)
               + Math.abs(targetVB.w - currentVB.w) + Math.abs(targetVB.h - currentVB.h);
   if (delta > 0.05) {
     rafId = requestAnimationFrame(animateViewBox);
   } else {
-    // Snap final exacto
     currentVB = { ...targetVB };
     if (svgMap) svgMap.setAttribute('viewBox',
       `${currentVB.x} ${currentVB.y} ${currentVB.w} ${currentVB.h}`);
+    updateAllNodes(); // snap final
     rafId = null;
   }
 }
@@ -377,101 +380,147 @@ if (svgMap) {
 }
 
 // --- LÓGICA DE INYECCIÓN DE NODOS ---
+// Estructura de 3 capas para resolver movimiento en hover y zoom reactivo:
+//   outerG  → posición (translate), se actualiza cada frame
+//   zoomG   → escala por zoom (scale), se actualiza cada frame, sin transición
+//   hoverG  → escala por hover, con transición CSS suave
+// Todo el contenido se dibuja en coordenadas locales (cx=0, cy=0 = centro del círculo)
+const BASE_RADIUS  = 35;
+const nodeRegistry = []; // { outerG, zoomG, data }
+
 if (nodesContainerSvg) {
   mapAllNodes.forEach(p => {
-    const nodeRadius = 35; 
-    const gridX = p.x * 9;   // Ajustado a la escala 900
-    const gridY = p.y * 6.2; // Ajustado a la escala 620
     const isLetter = isNaN(p.id);
+    const r  = BASE_RADIUS;
+    const bx = p.x * 9;
+    const by = p.y * 6.2;
 
-    const nodeGroup = document.createElementNS(svgNS, "g");
-    nodeGroup.setAttribute("class", "node-svg");
-    // Anclar transform-origin al centro del círculo para que no se mueva al escalar
-    nodeGroup.style.transformBox    = 'fill-box';
-    nodeGroup.style.transformOrigin = `${gridX}px ${gridY}px`;
-    nodeGroup.style.transition      = 'transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1)';
+    // Capa 1: posición
+    const outerG = document.createElementNS(svgNS, "g");
+    outerG.setAttribute('transform', `translate(${bx}, ${by})`);
 
-    const ring = document.createElementNS(svgNS, "circle");
-    ring.setAttribute("cx", gridX);
-    ring.setAttribute("cy", gridY);
-    ring.setAttribute("r", nodeRadius);
-    ring.setAttribute("fill", "#222"); 
-    ring.setAttribute("stroke", "#C8A96E"); 
-    ring.setAttribute("stroke-width", "3");
-    ring.setAttribute("style", "filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5)); pointer-events: none;");
-    nodeGroup.appendChild(ring);
+    // Capa 2: escala por zoom (sin transición — sigue al viewBox frame a frame)
+    const zoomG = document.createElementNS(svgNS, "g");
+    zoomG.style.transformOrigin = '0 0';
 
+    // Capa 3: hover con transición suave
+    const hoverG = document.createElementNS(svgNS, "g");
+    hoverG.style.transformOrigin = '0 0';
+    hoverG.style.transition = 'transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1)';
+
+    // ClipPath en coordenadas locales (0,0 = centro del círculo)
     const clipDef = document.createElementNS(svgNS, "clipPath");
-    const clipId = `clip-${p.id}`;
+    const clipId  = `clip-${p.id}`;
     clipDef.setAttribute("id", clipId);
     const clipCircle = document.createElementNS(svgNS, "circle");
-    clipCircle.setAttribute("cx", gridX);
-    clipCircle.setAttribute("cy", gridY);
-    clipCircle.setAttribute("r", nodeRadius - 1.5); 
+    clipCircle.setAttribute("cx", "0");
+    clipCircle.setAttribute("cy", "0");
+    clipCircle.setAttribute("r",  r - 1.5);
     clipDef.appendChild(clipCircle);
-    nodesContainerSvg.appendChild(clipDef); 
+    nodesContainerSvg.appendChild(clipDef);
 
+    // Ring cx=0, cy=0
+    const ring = document.createElementNS(svgNS, "circle");
+    ring.setAttribute("cx", "0");
+    ring.setAttribute("cy", "0");
+    ring.setAttribute("r",  r);
+    ring.setAttribute("fill",   "#222");
+    ring.setAttribute("stroke", "#C8A96E");
+    ring.setAttribute("stroke-width", "3");
+    ring.style.pointerEvents = 'none';
+    ring.style.filter = 'drop-shadow(0 4px 10px rgba(0,0,0,0.5))';
+
+    // Imagen de -r,-r a +r,+r
     const imgSvg = document.createElementNS(svgNS, "image");
-    imgSvg.setAttribute("href", p.img);
-    imgSvg.setAttribute("x", gridX - nodeRadius);
-    imgSvg.setAttribute("y", gridY - nodeRadius);
-    imgSvg.setAttribute("width", nodeRadius * 2);
-    imgSvg.setAttribute("height", nodeRadius * 2);
-    imgSvg.setAttribute("preserveAspectRatio", "xMidYMid slice"); 
-    imgSvg.setAttribute("clip-path", `url(#${clipId})`); 
-    imgSvg.setAttribute("style", "pointer-events: none;");
-    nodeGroup.appendChild(imgSvg);
+    imgSvg.setAttribute("href",  p.img);
+    imgSvg.setAttribute("x",     -r);
+    imgSvg.setAttribute("y",     -r);
+    imgSvg.setAttribute("width",  r * 2);
+    imgSvg.setAttribute("height", r * 2);
+    imgSvg.setAttribute("preserveAspectRatio", "xMidYMid slice");
+    imgSvg.setAttribute("clip-path", `url(#${clipId})`);
+    imgSvg.style.pointerEvents = 'none';
 
-    const badgeRadius = 13;
+    // Badge
+    const bRx = r - 6, bRy = r - 6;
     const badgeRing = document.createElementNS(svgNS, "circle");
-    badgeRing.setAttribute("cx", gridX + nodeRadius - 6);
-    badgeRing.setAttribute("cy", gridY + nodeRadius - 6);
-    badgeRing.setAttribute("r", badgeRadius);
-    badgeRing.setAttribute("fill", "#0a0a0a"); 
+    badgeRing.setAttribute("cx", bRx);
+    badgeRing.setAttribute("cy", bRy);
+    badgeRing.setAttribute("r",  13);
+    badgeRing.setAttribute("fill",   "#0a0a0a");
     badgeRing.setAttribute("stroke", isLetter ? '#8dbf8e' : '#d4763a');
     badgeRing.setAttribute("stroke-width", "2");
-    badgeRing.setAttribute("style", "pointer-events: none;");
-    nodeGroup.appendChild(badgeRing);
+    badgeRing.style.pointerEvents = 'none';
 
     const badgeText = document.createElementNS(svgNS, "text");
-    badgeText.setAttribute("x", gridX + nodeRadius - 6);
-    badgeText.setAttribute("y", gridY + nodeRadius - 6 + 1); 
+    badgeText.setAttribute("x", bRx);
+    badgeText.setAttribute("y", bRy + 1);
     badgeText.setAttribute("text-anchor", "middle");
-    badgeText.setAttribute("dominant-baseline", "central"); 
+    badgeText.setAttribute("dominant-baseline", "central");
     badgeText.setAttribute("font-family", "DM Sans, sans-serif");
-    badgeText.setAttribute("font-size", "11px");
+    badgeText.setAttribute("font-size",   "11px");
     badgeText.setAttribute("font-weight", "700");
     badgeText.setAttribute("fill", isLetter ? '#38cc13' : '#fff');
-    badgeText.setAttribute("style", "pointer-events: none;");
+    badgeText.style.pointerEvents = 'none';
     badgeText.textContent = p.id;
-    nodeGroup.appendChild(badgeText);
 
-    // ATRAPADOR DE CLICS INVISIBLE (Soluciona que no reaccionen al cursor)
+    // HitArea invisible
     const hitArea = document.createElementNS(svgNS, "circle");
-    hitArea.setAttribute("cx", gridX);
-    hitArea.setAttribute("cy", gridY);
-    hitArea.setAttribute("r", nodeRadius + 5); 
+    hitArea.setAttribute("cx",   "0");
+    hitArea.setAttribute("cy",   "0");
+    hitArea.setAttribute("r",    r + 5);
     hitArea.setAttribute("fill", "transparent");
-    hitArea.setAttribute("class", "node-hit"); // identificador para bloquear el pan
+    hitArea.setAttribute("class","node-hit");
     hitArea.style.pointerEvents = 'all';
     hitArea.style.cursor = 'pointer';
 
     hitArea.addEventListener('mouseenter', () => {
-      nodesContainerSvg.appendChild(nodeGroup); // trae al frente sin romper transform
-      nodeGroup.style.transform = 'scale(1.1)';
+      nodesContainerSvg.appendChild(outerG);   // trae al frente
+      hoverG.style.transform = 'scale(1.1)';   // solo la capa hover escala
     });
     hitArea.addEventListener('mouseleave', () => {
-      nodeGroup.style.transform = 'scale(1)';
+      hoverG.style.transform = 'scale(1)';
     });
-
-    // pointerup sobre el propio nodo = click real (no pan)
     hitArea.addEventListener('pointerup', (e) => {
       e.stopPropagation();
       openMapLightbox(p);
     });
-    
-    nodeGroup.appendChild(hitArea);
-    nodesContainerSvg.appendChild(nodeGroup);
+
+    hoverG.appendChild(ring);
+    hoverG.appendChild(imgSvg);
+    hoverG.appendChild(badgeRing);
+    hoverG.appendChild(badgeText);
+    hoverG.appendChild(hitArea);
+    zoomG.appendChild(hoverG);
+    outerG.appendChild(zoomG);
+    nodesContainerSvg.appendChild(outerG);
+
+    nodeRegistry.push({ outerG, zoomG, data: p });
+  });
+}
+
+// ── updateAllNodes ────────────────────────────────────────────────────────
+// Sincroniza posición y escala con el viewBox en cada frame de animateViewBox.
+// Para centrar los círculos sobre sus polígonos al hacer zoom in,
+// ajustá los valores `centroid` en mapNumbered según tu mapa real.
+function updateAllNodes() {
+  const zoomRatio = currentVB.w / 900; // 1 = sin zoom, 0.33 = 3× zoom in
+
+  // t: progreso de migración base → centroide (0=sin zoom, 1=3× zoom)
+  const t = Math.max(0, Math.min(1, (1 - zoomRatio) / 0.67));
+
+  nodeRegistry.forEach(({ outerG, zoomG, data }) => {
+    const bx = data.x * 9;
+    const by = data.y * 6.2;
+    const cx = data.centroid ? data.centroid.x * 9   : bx;
+    const cy = data.centroid ? data.centroid.y * 6.2 : by;
+
+    const px = bx + (cx - bx) * t;
+    const py = by + (cy - by) * t;
+
+    outerG.setAttribute('transform', `translate(${px}, ${py})`);
+    // Achica el radio en SVG para mantener tamaño visual constante en pantalla
+    zoomG.style.transform = `scale(${zoomRatio})`;
   });
 }
 
