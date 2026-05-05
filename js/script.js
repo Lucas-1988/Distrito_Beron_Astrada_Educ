@@ -59,6 +59,9 @@ function go(n) {
   counter.textContent = String(cur + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
   progress.style.width = ((cur + 1) / total * 100) + '%';
   updateTrack();
+
+  if (slides[cur].id === 'sBalance')    setTimeout(triggerBalanceAnim, 80);
+  if (slides[cur].id === 'sCorrientes') setTimeout(triggerBubbles, 200);
 }
 
 // ── Init ──────────────────────────────────────────────
@@ -260,25 +263,25 @@ observer.observe(webmapSlide, { attributes: true, attributeFilter: ['class'] });
 const mapNumbered = [
   // centroid = centro del polígono naranja correspondiente en coords % (x*9, y*6.2 = SVG px)
   // Ajustá estos valores según tu mapa real
-  { id: "1", label: "Escuela de Arte Municipal",               img: "imagenes/Escuela de Arte Municipal.jpg",               x: 11, y: 20, centroid: { x: 26, y: 40.2 } },
-  { id: "2", label: "Galería de Arte",                         img: "imagenes/Galería de Arte.jpg",                         x: 16, y: 48, centroid: { x: 23.1, y: 45.8 } },
-  { id: "3", label: "Museo del Carnaval",                      img: "imagenes/Museo del Carnaval.jpg",                      x: 25.4, y: 14.4, centroid: { x: 32.2, y: 32.3 } },
-  { id: "4", label: "Museo del Chamamé y Peña",                img: "imagenes/Museo del Chamamé y Peña.jpg",                x: 41.6, y: 10.2, centroid: { x: 42.1, y: 40.2 } },
-  { id: "5", label: "Museo del Deporte Correntino",            img: "imagenes/Museo del Deporte Correntino.jpg",            x: 30, y: 58, centroid: { x: 34.5, y: 52.3 } },
-  { id: "6", label: "Instituto de Diseño Técnico Industrial",  img: "imagenes/Instituto de Diseño Técnico Industrial.jpg",  x: 40, y: 88, centroid: { x: 46, y: 65 } },
-  { id: "7", label: "Expo Técnica",                            img: "imagenes/Expo Técnica.jpg",                            x: 57, y: 75, centroid: { x: 60.3, y: 52 } },
-  { id: "8", label: "Área Disponible para Equipamientos",      img: "imagenes/Área Disponible para Equipamientos.jpeg",     x: 70.5, y: 80.9, centroid: { x: 71, y: 62 } },
-  { id: "9", label: "Instituto Tecnológico",                   img: "imagenes/Instituto Tecnológico.jpg",                   x: 78, y: 78, centroid: { x: 78, y: 68 } },
+  { id: "1", label: "Escuela de Arte Municipal",               img: "imagenes/Escuela de Arte Municipal.jpg",               x: 11, y: 20, centroid: { x: 39.7, y: 60.5 } },
+  { id: "2", label: "Galería de Arte",                         img: "imagenes/Galería de Arte.jpg",                         x: 16, y: 48, centroid: { x: 38.8, y: 62.3 } },
+  { id: "3", label: "Museo del Carnaval",                      img: "imagenes/Museo del Carnaval.jpg",                      x: 25.4, y: 14.4, centroid: { x: 42.8, y: 57.7 } },
+  { id: "4", label: "Museo del Chamamé y Peña",                img: "imagenes/Museo del Chamamé y Peña.jpg",                x: 41.6, y: 10.2, centroid: { x: 46.2, y: 60.8 } },
+  { id: "5", label: "Museo del Deporte Correntino",            img: "imagenes/Museo del Deporte Correntino.jpg",            x: 33.5, y: 87.6, centroid: { x: 43.7, y: 65.1 } },
+  { id: "6", label: "Instituto de Diseño Técnico Industrial",  img: "imagenes/Instituto de Diseño Técnico Industrial.jpg",  x: 45.3, y: 90.2, centroid: { x: 49.6, y: 68.1 } },
+  { id: "7", label: "Expo Técnica",                            img: "imagenes/Expo Técnica.jpg",                            x: 58.8, y: 93.6, centroid: { x: 54.5, y: 65.5 } },
+  { id: "8", label: "Área Disponible para Equipamientos",      img: "imagenes/Área Disponible para Equipamientos.jpeg",     x: 72.1, y: 90.6, centroid: { x: 60.0, y: 68.1 } },
+  { id: "9", label: "Instituto Tecnológico",                   img: "imagenes/Instituto Tecnológico.jpg",                   x: 82.2, y: 80.6, centroid: { x: 63.9, y: 71.1 } },
 ];
 
 const mapLettered = [
-  { id: "a", label: "Plazoleta de los Inmigrantes",            img: "imagenes/Plazoleta de los Inmigrantes.jpg",            x:  7, y: 59.9}, 
-  { id: "b", label: "Predio Caminito",                         img: "imagenes/Predio Caminito.jpg",                         x: 37.5, y: 31},
-  { id: "c", label: "Plaza de las Américas",                   img: "imagenes/Plaza de las Américas.jpg",                   x: 59, y: 41 },
-  { id: "d", label: "Refuncionalización espacio público mixto escuela/paseo Lamadrid", img: "imagenes/Refuncionalización espacio público mixto escuela_paseo Lamadrid.jpeg", x: 49, y: 22 },
-  { id: "e", label: "Paseo de Lamadrid",                       img: "imagenes/Paseo de Lamadrid.jpg",                       x: 62.6, y: 31.7 },  // sin centroid → no migra
-  { id: "f", label: "Esquina Aviador Correa y República del Líbano", img: "imagenes/Esquina Aviador Correa y República del Líbano.jpg",  x: 67.1, y: 48.3 },  // sin centroid → no migra
-  { id: "g", label: "Corredor Saludable",                            img: "imagenes/Corredor Saludable.jpeg",                            x: 92, y: 70 },  // sin centroid → no migra
+  { id: "a", label: "Plazoleta de los Inmigrantes",            img: "imagenes/Plazoleta de los Inmigrantes.jpg",            x:  11.6, y: 83.4, centroid: { x: 32.5,   y: 69.6   } },
+  { id: "b", label: "Predio Caminito",                         img: "imagenes/Predio Caminito.jpg",                         x: 22, y: 87.3,  centroid: { x: 42.9,   y: 60.9   } },
+  { id: "c", label: "Plaza de las Américas",                   img: "imagenes/Plaza de las Américas.jpg",                   x: 82.4, y: 38.6,    centroid: { x: 56.6,   y: 60.9   } },
+  { id: "d", label: "Refuncionalización espacio público mixto escuela/paseo Lamadrid", img: "imagenes/Refuncionalización espacio público mixto escuela_paseo Lamadrid.jpeg", x: 57.6, y: 25.4, centroid: { x: 54.7, y: 54 } },
+  { id: "e", label: "Paseo de Lamadrid",                       img: "imagenes/Paseo de Lamadrid.jpg",                       x: 71.7, y: 26.3, centroid: { x: 57,   y: 56.8   } },  
+  { id: "f", label: "Esquina Aviador Correa y República del Líbano", img: "imagenes/Esquina Aviador Correa y República del Líbano.jpg",  x: 84.7, y: 55.1, centroid: { x: 58.8,   y: 63.3   } },  
+  { id: "g", label: "Corredor Saludable",                            img: "imagenes/Corredor Saludable.jpeg",                            x: 87.3, y: 69.3, centroid: { x: 62.7,   y: 67.7   } },  
 ];
 
 const mapAllNodes = [...mapNumbered, ...mapLettered];
@@ -655,3 +658,382 @@ document.addEventListener('keydown', e => {
     closeMapLightbox();
   }
 });
+// ====================================================
+// GRÁFICO BALANCE DE SUPERFICIES
+// ====================================================
+(function initBalanceChart() {
+  const rowsEl   = document.getElementById('bc-rows');
+  const deltasEl = document.getElementById('bc-deltas');
+  if (!rowsEl || !deltasEl) return;
+
+  const DATA = [
+    { label: 'Educación',         actual: 22941.84, prop: 28511.84 },
+    { label: 'Arte y Cultura',    actual:   465.59, prop:  2389.86 },
+    { label: 'Deportiva',         actual:    20.00, prop:  5863.00 },
+    { label: 'Espacios Públicos', actual:  2833.91, prop:  8726.93 },
+  ];
+
+  const MAX = Math.max(...DATA.flatMap(d => [d.actual, d.prop]));
+  const fmt = n => Math.round(n).toLocaleString('es-AR') + ' m²';
+
+  DATA.forEach(d => {
+    const pctA = (d.actual / MAX * 100).toFixed(2);
+    const pctP = (d.prop   / MAX * 100).toFixed(2);
+    rowsEl.innerHTML += `
+      <div class="bc-row">
+        <div class="bc-row-label">${d.label}</div>
+        <div class="bc-bars">
+          <div class="bc-bar-track">
+            <div class="bc-bar-fill bc-bar-fill--actual" data-pct="${pctA}" data-val="${d.actual}"></div>
+            <span class="bc-label bc-label--actual" data-pct="${pctA}" data-val="${d.actual}">0 m²</span>
+          </div>
+          <div class="bc-bar-track">
+            <div class="bc-bar-fill bc-bar-fill--prop" data-pct="${pctP}" data-val="${d.prop}"></div>
+            <span class="bc-label bc-label--prop" data-pct="${pctP}" data-val="${d.prop}">0 m²</span>
+          </div>
+        </div>
+      </div>`;
+  });
+
+  DATA.forEach(d => {
+    const pct = Math.round(((d.prop - d.actual) / d.actual) * 100);
+    deltasEl.innerHTML += `
+      <div class="bc-delta">
+        <div class="bc-delta-cat">${d.label}</div>
+        <div class="bc-delta-val">+${pct.toLocaleString('es-AR')}%</div>
+        <div class="bc-delta-row-sub">
+          <span class="bc-delta-sub-item"><span class="bc-delta-sub-label">Actual</span>${fmt(d.actual)}</span>
+          <span class="bc-delta-sub-arrow">→</span>
+          <span class="bc-delta-sub-item"><span class="bc-delta-sub-label">Propuesta</span>${fmt(d.prop)}</span>
+          <span class="bc-delta-sub-item bc-delta-sub-gain">+${fmt(d.prop - d.actual)}</span>
+        </div>
+      </div>`;
+  });
+})();
+
+function animateCount(el, target, duration) {
+  const start = performance.now();
+  const fmtN = v => Math.round(v).toLocaleString('es-AR') + ' m²';
+  function step(now) {
+    const t = Math.min((now - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - t, 3);
+    el.textContent = fmtN(ease * target);
+    if (t < 1) requestAnimationFrame(step);
+    else el.textContent = fmtN(target);
+  }
+  requestAnimationFrame(step);
+}
+
+function triggerBalanceAnim() {
+  document.querySelectorAll('#sBalance .bc-bar-fill').forEach(b => b.style.width = '0%');
+  document.querySelectorAll('#sBalance .bc-label').forEach(s => {
+    s.textContent = '0 m²';
+    s.style.transition = 'none';
+    s.style.left = '8px';
+  });
+  document.querySelectorAll('#sBalance .bc-delta').forEach(d => d.classList.remove('visible'));
+
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    document.querySelectorAll('#sBalance .bc-bar-fill').forEach(bar => {
+      const pct   = parseFloat(bar.dataset.pct);
+      const val   = parseFloat(bar.dataset.val);
+      const track = bar.closest('.bc-bar-track');
+      const label = track && track.querySelector('.bc-label');
+      const delay = parseFloat(getComputedStyle(bar).transitionDelay) * 1000 || 0;
+
+      bar.style.width = pct + '%';
+
+      if (label) {
+        label.style.transition = `left 1.1s cubic-bezier(0.4,0,0.2,1) ${delay}ms`;
+        label.style.left = `clamp(8px, calc(${pct}% - 100px), calc(100% - 108px))`;
+        setTimeout(() => animateCount(label, val, 900), delay);
+      }
+    });
+
+    setTimeout(() => {
+      document.querySelectorAll('#sBalance .bc-delta').forEach(d => d.classList.add('visible'));
+    }, 600);
+  }));
+}
+
+// ====================================================
+// BURBUJAS — La Ciudad de Corrientes
+// ────────────────────────────────────────────────────
+// Para ajustar cada burbuja editá solo el array BUBBLES:
+//   x   → posición horizontal en % del panel derecho (0=izq, 100=der)
+//   y   → posición vertical   en % del panel derecho (0=arr, 100=aba)
+//   size→ diámetro en px (dejá en null para usar el tamaño por defecto 140px)
+// ====================================================
+const BUBBLES = [    
+  { img: 'imagenes/carnaval.png',     label: 'Carnaval',   x: 40.9, y: 29, size: 180 },
+  { img: 'imagenes/chamame_prov.png', label: 'Chamamé',    x: 29, y: 33, size: 200 },
+  { img: 'imagenes/pesca.png',        label: 'Pesca',      x: 32, y: 58, size: 250 },
+  { img: 'imagenes/iglesia.png',      label: 'Patrimonio', x: 39, y: 10, size: 180 },
+  { img: 'imagenes/esteros.png',      label: 'Iberá',      x: 52, y: 47, size: 250 },
+  { img: 'imagenes/mate.png',         label: 'mate',       x: 57, y: 23, size: 180 },
+  { img: 'imagenes/costanera.png',    label: 'Costanera',  x: 29, y: 15, size: 130 },
+];
+
+// Inyectar burbujas en el DOM al cargar
+(function buildBubbles() {
+  const panel = document.getElementById('bubblePanel');
+  if (!panel) return;
+
+  BUBBLES.forEach((b, i) => {
+    const size = b.size || 140;
+    const el   = document.createElement('div');
+    el.className = 'bubble';
+    el.style.left   = b.x + '%';
+    el.style.top    = b.y + '%';
+    el.style.width  = size + 'px';
+    el.style.height = size + 'px';
+
+    el.innerHTML = `
+      <img src="${b.img}" alt="${b.label}">
+      <span class="bubble-label">${b.label}</span>`;
+
+    panel.appendChild(el);
+  });
+})();
+
+function triggerBubbles() {
+  const bubbles = document.querySelectorAll('#sCorrientes .bubble');
+  // Reset
+  bubbles.forEach(b => b.classList.remove('bubble-in'));
+  // Aparecen de a una con 220 ms de separación
+  bubbles.forEach((b, i) => {
+    setTimeout(() => b.classList.add('bubble-in'), i * 220);
+  });
+}
+
+// ====================================================
+// SLIDE ACTIVIDAD URBANA — sub-pasos navegables
+// ====================================================
+(function () {
+  const SLIDE_ID   = 'sActividad';
+  const TOTAL_CAPS = 6; // capas 0..5
+
+  // ── CONFIGURACIÓN DE CÍRCULOS (capa 3) ──────────────
+  // x, y  → posición en % del panel derecho (0=izq/arr, 100=der/aba)
+  // size  → diámetro en vw
+  // color → color de fondo con transparencia
+  // label → array de líneas de texto (vacío = sin label)
+  // labelOffset → { x, y } en % respecto al centro del círculo
+  const ACAP_CIRCLES = [
+    {
+      x: 50, y: 34,
+      size: '18vw',
+      color: 'rgba(160, 110, 210, 0.35)',
+      border: '2px solid rgba(140, 90, 190, 0.5)',
+      label: ['centro', 'Histórico'],
+      labelOffset: { x: -4, y: -3 }
+    },
+    {
+      x: 25, y: 50,
+      size: '18vw',
+      color: 'rgba(160, 110, 210, 0.35)',
+      border: '2px solid rgba(140, 90, 190, 0.5)',
+      label: ['Centro comercial', 'costero'],
+      labelOffset: { x: -8, y: -3 }
+    },
+  ];
+
+  // ── CONFIGURACIÓN DEL NUEVO NODO (capa 4) ───────────
+  const ACAP_NODO = {
+    x: 60, y: 66,
+    size: '15vw',
+    color: 'rgba(210, 80, 200, 0.35)',
+    border: '2px dashed rgba(190, 60, 180, 0.6)',
+    label: ['Nuevo Nodo'],
+    labelOffset: { x: -5, y: -3 }
+  };
+
+ 
+
+  // ────────────────────────────────────────────────────
+
+  let acapStep = 0;
+
+  function getSlide() { return document.getElementById(SLIDE_ID); }
+  function isActive()  { const s = getSlide(); return s && s.classList.contains('active'); }
+
+  // ── Construir DOM de círculos (capa 3) ──
+  function buildCircles() {
+    const layer = document.getElementById('acapCirclesLayer');
+    if (!layer) return;
+    layer.innerHTML = '';
+    ACAP_CIRCLES.forEach(function (c) {
+      // Círculo
+      const div = document.createElement('div');
+      div.className = 'acap-circulo';
+      div.style.cssText = [
+        'left:'   + c.x    + '%',
+        'top:'    + c.y    + '%',
+        'width:'  + c.size,
+        'height:' + c.size,
+        'background:' + c.color,
+        'border:' + c.border,
+      ].join(';');
+      layer.appendChild(div);
+
+      // Label
+      if (c.label && c.label.length) {
+        const lbl = document.createElement('div');
+        lbl.className = 'acap-label';
+        lbl.style.cssText = [
+          'left:'+ (c.x + (c.labelOffset ? c.labelOffset.x : 0)) + '%',
+          'top:' + (c.y + (c.labelOffset ? c.labelOffset.y : 0)) + '%',
+          'transform: translate(-50%, -50%)',
+          'text-align: center',
+        ].join(';');
+        lbl.innerHTML = c.label.map(function(l, i) {
+          return '<span class="acap-label-line' + (i === 0 ? '1' : '2') + '">' + l + '</span>';
+        }).join('');
+        layer.appendChild(lbl);
+      }
+    });
+  }
+
+  // ── Construir DOM del Nuevo Nodo (capa 4) ──
+  function buildNodo() {
+    const layer = document.getElementById('acapNodoLayer');
+    if (!layer) return;
+    layer.innerHTML = '';
+    const c = ACAP_NODO;
+
+    const div = document.createElement('div');
+    div.className = 'acap-circulo';
+    div.style.cssText = [
+      'left:'   + c.x    + '%',
+      'top:'    + c.y    + '%',
+      'width:'  + c.size,
+      'height:' + c.size,
+      'background:' + c.color,
+      'border:' + c.border,
+    ].join(';');
+    layer.appendChild(div);
+
+    if (c.label && c.label.length) {
+      const lbl = document.createElement('div');
+      lbl.className = 'acap-label';
+      lbl.style.cssText = [
+        'left:'+ (c.x + (c.labelOffset ? c.labelOffset.x : 0)) + '%',
+        'top:' + (c.y + (c.labelOffset ? c.labelOffset.y : 0)) + '%',
+        'transform: translate(-50%, -50%)',
+        'text-align: center',
+      ].join(';');
+      lbl.innerHTML = c.label.map(function(l, i) {
+        return '<span class="acap-label-line' + (i === 0 ? '1' : '2') + '">' + l + '</span>';
+      }).join('');
+      layer.appendChild(lbl);
+    }
+  }
+
+  // ── Construir flechas SVG (capa 5) ──
+  function buildArrows() {
+    const g = document.getElementById('acapArrowsGroup');
+    if (!g) return;
+    g.innerHTML = '';
+    ACAP_ARROWS.forEach(function (a) {
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      path.setAttribute('class', 'acap-arrow');
+      path.setAttribute('d', a.d);
+      path.setAttribute('marker-end', 'url(#arr)');
+      g.appendChild(path);
+    });
+  }
+
+  // ── Construir stepper ──
+  function buildStepper() {
+    const st = document.getElementById('acapStepper');
+    if (!st) return;
+    st.innerHTML = '';
+    for (let i = 0; i < TOTAL_CAPS; i++) {
+      const d = document.createElement('span');
+      d.className = 'acap-step-dot' + (i === 0 ? ' active' : '');
+      st.appendChild(d);
+    }
+  }
+
+  // ── Renderizar estado actual ──
+  function render() {
+    const slide = getSlide();
+    if (!slide) return;
+    for (let i = 1; i < TOTAL_CAPS; i++) {
+      const cap = slide.querySelector('.acap-' + i);
+      if (cap) cap.classList.toggle('acap-visible', i <= acapStep);
+    }
+    slide.querySelectorAll('.acap-step-dot').forEach(function (d, i) {
+      d.classList.toggle('active', i === acapStep);
+    });
+  }
+
+  function reset() { acapStep = 0; render(); }
+
+  function next() {
+    if (acapStep < TOTAL_CAPS - 1) { acapStep++; render(); return true; }
+    return false;
+  }
+  function prev() {
+    if (acapStep > 0) { acapStep--; render(); return true; }
+    return false;
+  }
+
+  // ── Init: construir elementos al cargar ──
+  window.addEventListener('DOMContentLoaded', function () {
+    buildCircles();
+    buildNodo();
+    buildArrows();
+    buildStepper();
+  });
+
+  // ── Observer para reset al entrar a la slide ──
+  const observer = new MutationObserver(function () {
+    if (isActive()) reset();
+  });
+  window.addEventListener('DOMContentLoaded', function () {
+    const s = getSlide();
+    if (s) observer.observe(s, { attributes: true, attributeFilter: ['class'] });
+  });
+
+  // ── Intercepción de navegación ──
+  // Botones — sobreescribir onclick después de que el script original los asigne
+  window.addEventListener('load', function () {
+    document.getElementById('nextBtn').onclick = function () {
+      if (isActive() && next()) return;
+      go(cur + 1);
+    };
+    document.getElementById('prevBtn').onclick = function () {
+      if (isActive() && prev()) return;
+      go(cur - 1);
+    };
+  });
+
+  // Teclado (capture para interceptar antes del listener original)
+  document.addEventListener('keydown', function (e) {
+    if (!isActive()) return;
+    if (e.key === 'ArrowRight' || e.key === ' ') {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      if (!next()) go(cur + 1);
+    }
+    if (e.key === 'ArrowLeft') {
+      e.stopImmediatePropagation();
+      if (!prev()) go(cur - 1);
+    }
+  }, true);
+
+  // Swipe
+  let tx0 = null;
+  document.addEventListener('touchstart', function (e) { tx0 = e.touches[0].clientX; }, true);
+  document.addEventListener('touchend', function (e) {
+    if (!isActive() || tx0 === null) return;
+    const dx = e.changedTouches[0].clientX - tx0;
+    tx0 = null;
+    if (Math.abs(dx) < 40) return;
+    e.stopImmediatePropagation();
+    if (dx < 0) { if (!next()) go(cur + 1); }
+    else        { if (!prev()) go(cur - 1); }
+  }, true);
+
+})();

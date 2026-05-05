@@ -23,16 +23,47 @@
   </div>
 </div>
 <!--------------------------------->
+<!-- SLIDE: Corrientes como ciudad -->
+<div class="slide slide-divider" id="sDivCorrientes" style="display:flex;">
+  <div class="divider-num">01</div>
+  <div class="divider-label">Contexto Provincial</div>
+  <div class="divider-title">La Provincia<br>de Corrientes</div>
+  <div class="divider-line"></div>
+</div>
+
+<div class="slide slide-split" id="sCorrientes">
+  <div class="split-left">
+    <div class="split-eyebrow anim d1">01 — Corrientes, Cultura</div>
+    <div class="split-title anim d2">La Provincia<br>de Corrientes<br>y su Cultura</div>
+    <div class="split-divider anim d2"></div>
+    <div class="split-body anim d3">
+      • Corrientes como oferta Turística<br><br>
+      • Enclave cultural y festivo del NEA<br><br>
+      • Capital Nacional del Carnaval y del Chamamé<br><br>
+      • Biodiversidad única en los Esteros del Iberá<br><br>
+      • Identidad Histórica singular<br><br>
+      • El Mate como símbolo de encuentro y cultura popular
+    </div>
+    <div class="split-num anim d4">Provincia de Corrientes</div>
+  </div>
+
+  <!-- Panel derecho: mapa base + burbujas inyectadas por JS -->
+  <div class="split-right bubble-map-panel" id="bubblePanel">
+    <img class="bubble-map-bg" src="imagenes/Mapa_corrientes.jpg" alt="Mapa Corrientes">
+  </div>
+</div>
+<!--------------------------------->
+
 <div class="slide slide-divider" id="s1" style="display:flex;">
   <div class="divider-num">01</div>
-  <div class="divider-label">Sección</div>
-  <div class="divider-title">Territorio y <br>Contexto Urbano</div> 
+  <div class="divider-label">Contexto Urbano</div>
+  <div class="divider-title">La Ciudad<br>de Corrientes</div> 
   <div class="divider-line"></div>
 </div>
 <div class="slide slide-split" id="s12">
   <div class="split-left">
     <div class="split-eyebrow anim d1">01 — Contexto Urbano</div>
-    <div class="split-title anim d2">La Ciudad<br>de Corrientes</div>
+    <div class="split-title anim d2">La Ciudad<br>de Corrientes<br>y su Estructura</div>
     <div class="split-divider anim d2"></div>
     <div class="split-body anim d3">
     
@@ -52,27 +83,94 @@
   <div class="split-right"><img src="imagenes/zonificacion1.jpg" alt="zonificacion corrientes"></div>
 </div>
 
-<div class="slide slide-split" id="s12">
+<!--------------------------
+  <div class="slide slide-divider" id="s1" style="display:flex;">
+    <div class="divider-num">02</div>
+    <div class="divider-label">Sección</div>
+    <div class="divider-title">Cultura y Ciudad</div> 
+    <div class="divider-line"></div>
+  </div>
+
+  <div class="slide slide-split" id="s12">
+    <div class="split-left">
+      <div class="split-eyebrow anim d1">02 — Cultura y Ciudad</div>
+      <div class="split-title anim d2">Zona Centro Sur<br>Un nuevo Nodo</div>
+      <div class="split-divider anim d2"></div>
+      <div class="split-body anim d3" style="white-space: pre-wrap; font-family: inherit;">
+            ○ Anillo principal de desarrollo
+            ○ Nuevo centro de gravedad urbana
+            ○ Intenciones:
+              • Redistribuir flujos
+              • Descomprimir el area central historica y costera
+              • Valorización del entorno
+              • Disminuir brecha entre CIUDAD HISTORICA y TEJIDO URBANO SUR
+
+          - GENERADOR DE NUEVO NODO DE IDENTIDAD, VALOR Y OPORTUNIDAD -
+      </div>
+      <div class="split-num anim d4">Corrientes • Capital</div>
+    </div>
+    <div class="split-right"><img src="imagenes/zonificacion3.jpg" alt="zonificacion corrientes"></div>
+  </div>
+------->
+<!-----------------ACTIVIDAD URBANA - SLIDE CON SUB-PASOS ----------------->
+<div class="slide slide-split" id="sActividad">
+
+  <!-- PANEL IZQUIERDO: texto descriptivo -->
   <div class="split-left">
-    <div class="split-eyebrow anim d1">01 — Contexto Urbano</div>
-    <div class="split-title anim d2">Area de intervención</div>
+    <div class="split-eyebrow anim d1">02 — Cultura y Ciudad</div>
+    <div class="split-title anim d2">Zona Centro Sur<br>Un nuevo Nodo</div>
     <div class="split-divider anim d2"></div>
     <div class="split-body anim d3" style="white-space: pre-wrap; font-family: inherit;">
-          ○ Anillo principal de desarrollo
-          ○ Nuevo centro de gravedad urbana
-          ○ INTENCIONES:
-            • REDISTRIBUIR FLUJOS
-            • DESCOMPRIMIR el area central historica y costera
-            • VALORIZACIÓN del entorno
-            • Disminuir brecha entre CIUDAD HISTORICA y TEJIDO URBANO SUR
+      ○ Anillo principal de desarrollo
+      ○ Nuevo centro de gravedad urbana
+      ○ Intenciones:
+        • Redistribuir flujos
+        • Descomprimir el area central historica y costera
+        • Valorización del entorno
+        • Disminuir brecha entre CIUDAD HISTORICA y TEJIDO URBANO SUR
 
-        - GENERADOR DE NUEVO NODO DE IDENTIDAD, VALOR Y OPORTUNIDAD -
+    - GENERADOR DE NUEVO NODO DE IDENTIDAD, VALOR Y OPORTUNIDAD -
     </div>
     <div class="split-num anim d4">Corrientes • Capital</div>
   </div>
-  <div class="split-right"><img src="imagenes/zonificacion3.jpg" alt="zonificacion corrientes"></div>
+
+  <!-- PANEL DERECHO: mapa con capas progresivas -->
+  <div class="split-right actividad-map-wrap">
+
+    <!-- CAPA 0: mapa base (siempre visible) -->
+    <img class="acap acap-0" src="imagenes/mancha_acti-02.jpg" alt="Mapa base">
+
+    <!-- CAPA 1: heatmap -->
+    <img class="acap acap-1" src="imagenes/mancha_sola-03.png" alt="Heatmap">
+
+    <!-- CAPA 2: mancha verde -->
+    <img class="acap acap-2" src="imagenes/mancha_sola2-04.png" alt="Nodo verde">
+
+    <!-- CAPA 3: círculos y labels (inyectados por JS desde ACAP_CIRCLES) -->
+    <div class="acap acap-3" id="acapCirclesLayer"></div>
+
+    <!-- CAPA 4: Nuevo Nodo Cultural — círculo extra + label -->
+    <div class="acap acap-4" id="acapNodoLayer"></div>
+
+    <!-- CAPA 5: flechas SVG (posiciones configurables desde ACAP_ARROWS en JS) -->
+    <svg class="acap acap-5 acap-flechas" id="acapArrowsLayer"
+         viewBox="0 0 100 100" preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr" markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" orient="auto">
+          <path d="M0,0 L5,2.5 L0,5 Z" fill="#e21f70"/>
+        </marker>
+      </defs>
+      <g id="acapArrowsGroup"></g>
+    </svg>
+
+    <!-- Stepper de sub-pasos -->
+    <div class="acap-stepper" id="acapStepper"></div>
+
+  </div>
 </div>
 
+<!-------------El triangulo estrategico-------------------->
 
 <div class="slide slide-divider" id="s1" style="display:flex;">
   <div class="divider-num">02</div>
@@ -241,15 +339,31 @@
   </div> 
 </div>
 
-<!-----------------AGREGAR MAPAS NUEVOS ACÁ---------------->
+<!-----------------PROPUESTA----------------->
 
-<!-------------------------------->
 <div class="slide slide-divider" id="s1" style="display:flex;">
   <div class="divider-num">03</div>
   <div class="divider-label">Sección</div>
   <div class="divider-title">Propuesta integral <br>del sector</div>
   <div class="divider-line"></div>
 </div>
+
+<!--------------NEXOS Y CIRCUITOS------------------>
+
+<div class="slide slide-split" id="s12">
+  <div class="split-left">
+    <div class="split-eyebrow anim d1">Nexos y Circuitos</div>
+    <div class="split-title anim d2">Nexos y Circuitos</div>
+    <div class="split-divider anim d2"></div>
+    <div class="split-body anim d3">
+      
+    </div>
+    <div class="split-num anim d4">Barrio Berón de Astrada · Corrientes</div>
+  </div>
+  <div class="split-right"><img src="imagenes/nexos-08.jpg" alt="propuesta completa"></div>  
+</div>
+
+<!--------------RELEVAMIENTO AEREO------------------>
 
 <div class="slide slide-split" id="s12">
   <div class="split-left">
@@ -263,22 +377,8 @@
   </div>
   <div class="split-right"><img src="imagenes/Relevamiento_zonificación.jpg" alt="propuesta completa"></div>  
 </div>
-<!-------------------------------->
 
-<div class="slide slide-split" id="s12">
-  <div class="split-left">
-    <div class="split-eyebrow anim d1">Nexos y Circuitos</div>
-    <div class="split-title anim d2">Nexos y Circuitos</div>
-    <div class="split-divider anim d2"></div>
-    <div class="split-body anim d3">
-      
-    </div>
-    <div class="split-num anim d4">Barrio Berón de Astrada · Corrientes</div>
-  </div>
-  <div class="split-right"><img src="imagenes/nexos y circuitos.jpg" alt="propuesta completa"></div>  
-</div>
-
-<!-------------------------------->
+<!---------------MAPA DE PROPUESTAS----------------->
 <div class="slide slide-split" id="propuestas">
   <div class="split-left" style="overflow-y: auto; padding-right: 20px;">
     <div class="split-eyebrow anim d1">3 - Propuesta integral del sector</div>
@@ -294,7 +394,7 @@
     <div class="split-num anim d4">Barrio Berón de Astrada · Corrientes</div>
   </div>
   
-  <div class="split-right map-area" style="background: #e8e3d5; display: flex; align-items: center;">
+  <div class="split-right map-area" style="background: #ffffff; display: flex; align-items: center;">
     <svg class="map-svg-interactive" viewBox="0 0 900 620" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" style="width: 100%; height: 100%;">
     <image href="imagenes/plano_base.jpg" x="0" y="0" width="900" height="620" preserveAspectRatio="xMidYMid slice"/>      
     <g id="nodes-container-svg"></g>
@@ -317,14 +417,55 @@
   </div>
 </div>
 
-<!--------------ETAPA 1 - INICIO ------------------>
+<!-----------------POBLACIÓN BENEFICIADA ----------------->
+<div class="slide slide-benef" id="sBenef">
+  <div class="split-left">
+    <div class="split-eyebrow anim d1">02 — Alcance del Proyecto</div>
+    <div class="split-title anim d2">Población<br>Beneficiada</div>
+    <div class="split-divider anim d2"></div>
+    <div class="split-body anim d3">
+      Para una ciudad de 15 minutos (POT de la Ciudad de Corrientes 2022), y un alcance de 800m, la intervención tiene un impacto directo en <strong>22.900 personas</strong>, lo que equivale a unas <strong>5.000 familias</strong> como beneficiarios directos, cubriendo alrededor de <strong>258 has</strong> inmediatas al sector.
+    </div>
+    <div class="split-num anim d4">Barrio Berón de Astrada · Corrientes</div>
+  </div>
+  <div class="split-right benef-map-wrap">
+    <img class="benef-img benef-img--base" src="imagenes/Mapa_benef1.jpg" alt="Mapa población beneficiada">
+    <img class="benef-img benef-img--reveal" src="imagenes/Mapa_benef2.jpg" alt="Mapa impacto 22900 personas">
+  </div>
+</div>
+
+<!-------- SLIDE: Balance de Superficies -------->
+<div class="slide slide-split" id="sBalance">
+  <div class="split-left">
+    <div class="split-eyebrow anim d1">3 — Propuesta Integral del Sector</div>
+    <div class="split-title anim d2">Balance de<br>Superficies</div>
+    <div class="split-divider anim d2"></div>
+    <div class="split-body anim d3">
+      La propuesta amplía significativamente la oferta de usos públicos del barrio, multiplicando la superficie destinada a deporte, cultura y espacio público respecto al estado actual.
+    </div>
+    <div class="split-num anim d4">Barrio Berón de Astrada · Corrientes</div>
+  </div>
+  <div class="split-right" style="display:flex; align-items:center; justify-content:center; padding:40px 48px; background:#111; overflow-y:auto;">
+    <div class="balance-chart">
+      <div class="bc-legend">
+        <span class="bc-leg"><i class="bc-dot bc-dot--actual"></i>Estado actual</span>
+        <span class="bc-leg"><i class="bc-dot bc-dot--prop"></i>Propuesta</span>
+      </div>
+      <div id="bc-rows"></div>
+      <div class="bc-divider-line"></div>
+      <div id="bc-deltas" class="bc-delta-row"></div>
+    </div>
+  </div>
+</div>
+
+<!-------------- WEBMAP DE PROPUESTAS ------------------>
 <div class="slide slide-split" id="webmap">
   <div class="split-left">
     <div class="split-eyebrow anim d1">Webmap de Propuestas</div>
     <div class="split-title anim d2">Webmap de Propuestas</div>
     <div class="split-divider anim d2"></div>
     <div class="split-body anim d3">
-      Webmap de Propuestas
+      
     </div>
     <div class="split-num anim d4">Barrio Berón de Astrada · Corrientes</div>
   </div>
