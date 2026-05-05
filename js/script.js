@@ -819,14 +819,17 @@ function triggerBubbles() {
   // color → color de fondo con transparencia
   // label → array de líneas de texto (vacío = sin label)
   // labelOffset → { x, y } en % respecto al centro del círculo
+// ── CONFIGURACIÓN DE CÍRCULOS (capa 3) ──────────────
   const ACAP_CIRCLES = [
     {
       x: 50, y: 34,
       size: '18vw',
       color: 'rgba(160, 110, 210, 0.35)',
       border: '2px solid rgba(140, 90, 190, 0.5)',
-      label: ['centro', 'Histórico'],
-      labelOffset: { x: -4, y: -3 }
+      label: ['Centro', 'Histórico'],
+      labelX: 57, // Ajustá este valor para mover horizontalmente (0 a 100)
+      labelY: 30, // Ajustá este valor para mover verticalmente (0 a 100)
+      shadow: "0 0 6px white, 0 0 12px white, 0 0 18px white" // Buffer blanco reforzado
     },
     {
       x: 25, y: 50,
@@ -834,7 +837,9 @@ function triggerBubbles() {
       color: 'rgba(160, 110, 210, 0.35)',
       border: '2px solid rgba(140, 90, 190, 0.5)',
       label: ['Centro comercial', 'costero'],
-      labelOffset: { x: -8, y: -3 }
+      labelX: 35, // Ajustá este valor para mover horizontalmente
+      labelY: 53, // Ajustá este valor para mover verticalmente
+      shadow: "0 0 6px white, 0 0 12px white, 0 0 18px white"
     },
   ];
 
@@ -844,11 +849,14 @@ function triggerBubbles() {
     size: '15vw',
     color: 'rgba(210, 80, 200, 0.35)',
     border: '2px dashed rgba(190, 60, 180, 0.6)',
-    label: ['Nuevo Nodo'],
-    labelOffset: { x: -5, y: -3 }
+    textposition: 'center',
+    label: ['Nuevo Nodo Cultural'],
+    labelX: 72, // Ajustá este valor para mover horizontalmente
+    labelY: 67, // Ajustá este valor para mover verticalmente
+    shadow: "0 0 6px white, 0 0 12px white, 0 0 18px white"
   };
 
- 
+
 
   // ────────────────────────────────────────────────────
 

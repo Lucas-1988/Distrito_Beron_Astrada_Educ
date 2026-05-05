@@ -1041,3 +1041,19 @@ body {
   background: #C8A96E;
   transform: scale(1.35);
 }
+
+.acap-label {
+    /* Color del texto (preferentemente oscuro para contrastar con el buffer blanco) */
+    color: #1a1a1a; 
+    font-weight: 700;
+    
+    /* Múltiples sombras blancas para crear el buffer sólido */
+    text-shadow: 
+        0 0 4px #ffffff, 
+        0 0 8px #ffffff, 
+        0 0 12px #ffffff,
+        -1px -1px 2px #ffffff, 
+         1px -1px 2px #ffffff, 
+        -1px  1px 2px #ffffff, 
+         1px  1px 2px #ffffff;
+}
