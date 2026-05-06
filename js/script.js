@@ -579,7 +579,7 @@ function updateAllNodes() {
     }
   });
 }
-
+/*
 // ====================================================
 // PANEL DE CALIBRACIÓN — siempre visible en el mapa
 // Pasá el mouse sobre el centro de cada polígono y
@@ -622,6 +622,7 @@ function updateAllNodes() {
       `<span style="color:#555; font-size:10px">centroid: { x: ${dx}, y: ${dy} }</span>`;
   });
 })();
+*/
 
 // 3. Lógica del Lightbox
 const mapLb = document.getElementById('mapLightbox');
@@ -765,13 +766,14 @@ function triggerBalanceAnim() {
 //   size→ diámetro en px (dejá en null para usar el tamaño por defecto 140px)
 // ====================================================
 const BUBBLES = [    
-  { img: 'imagenes/carnaval.png',     label: 'Carnaval',   x: 40.9, y: 29, size: 180 },
-  { img: 'imagenes/chamame_prov.png', label: 'Chamamé',    x: 29, y: 33, size: 200 },
-  { img: 'imagenes/pesca.png',        label: 'Pesca',      x: 32, y: 58, size: 250 },
-  { img: 'imagenes/iglesia.png',      label: 'Patrimonio', x: 39, y: 10, size: 180 },
-  { img: 'imagenes/esteros.png',      label: 'Iberá',      x: 52, y: 47, size: 250 },
-  { img: 'imagenes/mate.png',         label: 'mate',       x: 57, y: 23, size: 180 },
-  { img: 'imagenes/costanera.png',    label: 'Costanera',  x: 29, y: 15, size: 130 },
+
+  { img: 'imagenes/pesca.png',        label: 'Pesca',      x: 32, y: 58, size: 180 },
+  { img: 'imagenes/iglesia.png',      label: 'Patrimonio', x: 39, y: 8, size: 150 },
+  { img: 'imagenes/esteros.png',      label: 'Iberá',      x: 52, y: 47, size: 180 },
+  { img: 'imagenes/mate.png',         label: 'mate',       x: 57, y: 23, size: 130 },
+  { img: 'imagenes/costanera.png',    label: 'Costanera',  x: 29, y: 13, size: 130 },
+  { img: 'imagenes/carnaval.png',     label: 'Carnaval',   x: 42.9, y: 29, size: 200 },
+  { img: 'imagenes/chamame_prov.png', label: 'Chamamé',    x: 29, y: 36, size: 250 },
 ];
 
 // Inyectar burbujas en el DOM al cargar
