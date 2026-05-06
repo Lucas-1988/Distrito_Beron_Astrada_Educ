@@ -730,11 +730,54 @@ body {
 ==================================================== */
 .balance-chart { width: 100%; }
 
-.bc-legend { display: flex; gap: 20px; margin-bottom: 24px; }
-.bc-leg { display: flex; align-items: center; gap: 7px; font-size: 11px; color: rgba(255,255,255,.45); letter-spacing: .5px; text-transform: uppercase; }
-.bc-dot { width: 10px; height: 10px; border-radius: 2px; display:inline-block; flex-shrink:0; }
-.bc-dot--actual { background: rgba(255,255,255,.22); }
-.bc-dot--prop   { background: #C8A96E; }
+.bc-legend {
+  display: flex;
+  gap: 28px;
+  margin-bottom: 24px;
+  align-items: flex-start;
+}
+
+.bc-leg-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bc-leg-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.bc-leg-bar {
+  height: 8px;
+  border-radius: 3px;
+}
+
+/* Barra "Estado actual" — corta, gris */
+.bc-leg-bar--actual {
+  width: 52px;
+  background: rgba(255, 255, 255, 0.22);
+}
+
+/* Barra "Propuesta" — misma longitud por defecto */
+.bc-leg-bar--prop {
+  width: 52px;
+  background: #C8A96E;
+}
+
+/* En el ítem "Propuesta", la barra dorada es más larga */
+.bc-leg-bar--prop-long {
+  width: 80px;
+}
+
+.bc-leg-text {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
 
 .bc-row { margin-bottom: 18px; }
 .bc-row-label { font-size: 11px; color: rgba(255,255,255,.4); letter-spacing: .5px; text-transform: uppercase; margin-bottom: 6px; }
@@ -1185,4 +1228,110 @@ body {
   font-size: clamp(10px, 1.1vw, 13px);
   color: rgba(255, 255, 255, 0.75);
   line-height: 1.3;
+}
+/* ====================================================
+   HIGHLIGHT — clases para resaltar palabras en texto
+==================================================== */
+
+/* Dorado — tamaño normal del split-body (15px) */
+.highlight {
+  color: #C8A96E;
+  font-weight: 700;
+}
+
+/* Dorado — más grande */
+.highlight--lg {
+  color: #C8A96E;
+  font-weight: 700;
+  font-size: 19px;
+}
+
+/* Dorado — más pequeño */
+.highlight--sm {
+  color: #C8A96E;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+/* Blanco puro resaltado */
+.highlight--white {
+  color: #FFFFFF;
+  font-weight: 700;
+}
+
+/* Blanco grande */
+.highlight--white-lg {
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 19px;
+}
+
+/* Rojo/acento */
+.highlight--red {
+  color: #e21f70;
+  font-weight: 700;
+}
+
+/* Itálica dorada — para citas o énfasis suave */
+.highlight--italic {
+  color: #C8A96E;
+  font-style: italic;
+  font-weight: 400;
+}
+/* ====================================================
+   NUEVOS PUNTOS DE INTERÉS — imagen en slide Nexos
+==================================================== */
+.nexos-puntos {
+  margin-top: 18px;
+  opacity: 0;
+  transform: translateY(8px);
+  animation: none;
+}
+
+.slide.active .nexos-puntos {
+  animation: nrefIn 1.5s ease 2.5s forwards;
+}
+
+.slide:not(.active) .nexos-puntos {
+  opacity: 0;
+  transform: translateY(8px);
+  animation: none;
+}
+
+.nexos-puntos img {
+  width: 100%;
+  max-width: 550px;
+  height: auto;
+  display: block;
+  /* El PNG tiene fondo negro — mix-blend-mode lo elimina */
+  mix-blend-mode: screen;
+  filter: brightness(0.95);
+}
+
+/* ====================================================
+   REFERENCIA ACTIVIDADES — slide Zona Centro Sur
+==================================================== */
+.acti-ref {
+  margin-top: 14px;
+  opacity: 0;
+  transform: translateY(8px);
+  animation: none;
+}
+
+.slide.active .acti-ref {
+  animation: nrefIn 0.6s ease 2.0s forwards;
+}
+
+.slide:not(.active) .acti-ref {
+  opacity: 0;
+  transform: translateY(8px);
+  animation: none;
+}
+
+.acti-ref img {
+  width: 100%;
+  max-width: 340px;
+  height: auto;
+  display: block;
+  mix-blend-mode: screen;
 }
